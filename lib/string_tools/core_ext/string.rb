@@ -17,7 +17,7 @@ class String
   # возвращает строку из которой удалены HTML-теги
   # символы <>&"  остаются без изменения
   def strip_tags
-    ActionController::Base.helpers.strip_tags(self).to_str
+    ActionController::Base.helpers.strip_tags(self).to_str.gsub(/<!--/, '<--')
   end
 
   # '11,3'.to_f
