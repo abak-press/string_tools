@@ -6,6 +6,8 @@ require 'active_support/core_ext/string'
 require 'string_tools/core_ext/string'
 
 module StringTools
+  autoload :HTML, 'string_tools/html'
+
   module CharDet
     # Возвращает true если строка содержит допустимую
     # последовательность байтов для кодировки utf8 и false в обратном случае
