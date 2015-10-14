@@ -4,6 +4,9 @@ require 'uri'
 
 module StringTools
   module HTML
+    # минимальная длина строки, в которой могут быть ссылки
+    TEXT_WITH_LINKS_MINIMUM_LENGTH = '<a href="'.length
+
     # Public: Удаляет ссылки на неразрешенные домены
     #
     # html    - String содержимое потенциально ненужных ссылок
@@ -29,6 +32,8 @@ module StringTools
     #
     # Returns String without links to external resources
     def self.remove_links(html, options = {})
+      return html if html.length < TEXT_WITH_LINKS_MINIMUM_LENGTH
+
       Loofah.fragment(html).scrub!(LinksRemoveScrubber.new(options)).to_s
     end
 
