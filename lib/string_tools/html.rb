@@ -1,6 +1,6 @@
 # coding: utf-8
 require 'loofah'
-require 'uri'
+require 'addressable/uri'
 
 module StringTools
   module HTML
@@ -44,16 +44,20 @@ module StringTools
 
       def scrub(node)
         return unless node.name == 'a'.freeze
-        uri = URI.parse(node['href'.freeze])
+        href = node['href']
+        return if href.blank?
+        uri = Addressable::URI.parse(href).normalize
+        return unless uri.host
         node.swap(node.children) unless whitelisted? uri.host
-      rescue URI::InvalidURIError => _
+      rescue
+        # в любой непонятной ситуации просто удаляем ссылку
         node.swap(node.children)
       end
 
       def whitelisted?(domain)
-        host_parts = domain.split('.'.freeze).reverse!
-        host = host_parts[0] # com, ru ...
-        1.upto(host_parts.length - 1) do |i|
+        host_parts = domain.split('.'.freeze)
+        host = host_parts[-1] # com, ru ...
+        (host_parts.length - 2).downto(0) do |i|
           subdomain = host_parts[i]
           host = "#{subdomain}.#{host}"
           return true if @whitelist.include? host
