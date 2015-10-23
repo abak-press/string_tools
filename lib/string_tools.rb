@@ -110,11 +110,10 @@ module StringTools
 
   module Sanitizer
     class Base
-
       TAGS_WITH_ATTRIBUTES = {
         'p'     => %w(align style),
         'div'   => %w(align style),
-        'span'   => %w(align style),
+        'span'  => %w(align style),
         'td'    => %w(align width valign colspan rowspan style),
         'th'    => %w(align width valign colspan rowspan style),
         'a'     => %w(href target name style),
@@ -137,15 +136,40 @@ module StringTools
         attributes.merge!(attr)
         elements = attributes.keys | TAGS_WITHOUT_ATTRIBUTES
 
-        Sanitize.fragment(str,
+        Sanitize.fragment(
+          str,
           :attributes => attributes,
           :elements => elements,
           :css => {:properties => Sanitize::Config::RELAXED[:css][:properties]},
           :remove_contents => %w(style javascript),
-          :allow_comments => false
+          :allow_comments => false,
+          :transformers => [LINK_NORMALIZER]
         )
       end
     end
+
+    # приводит ссылки согласно стандарту, не корёжит
+    # http://www.фермаежей.рф => http://www.xn--80ajbaetq5a8a.xn--p1ai
+    class LinkNormalizer
+      def call(env)
+        node = env[:node]
+        case node.name
+        when 'a'.freeze
+          normalize_link node, 'href'.freeze
+        when 'img'.freeze
+          normalize_link node, 'src'.freeze
+        end
+      end
+
+      private
+
+      def normalize_link(node, attr_name)
+        return unless node[attr_name]
+        node[attr_name] = Addressable::URI.parse(node[attr_name]).normalize.to_s
+      end
+    end
+
+    LINK_NORMALIZER = LinkNormalizer.new
   end
 
   module SumInWords
