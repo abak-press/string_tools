@@ -122,5 +122,23 @@ describe StringTools::HTML do
         end
       end
     end
+
+    context 'unicode domains' do
+      subject { StringTools::HTML.remove_links(html, whitelist: ['фермаежей.рф']) }
+
+      let(:html) do
+        <<-MARKUP
+          <a href="https://www.фермаежей.рф">www.фермаежей.рф</a>
+          <a href="https://www.мояфермаежей.рф">www.мояфермаежей.рф</a>
+        MARKUP
+      end
+
+      it 'should keep relative links' do
+        is_expected.to eq(<<-MARKUP)
+          <a href="https://www.фермаежей.рф">www.фермаежей.рф</a>
+          www.мояфермаежей.рф
+        MARKUP
+      end
+    end
   end
 end
