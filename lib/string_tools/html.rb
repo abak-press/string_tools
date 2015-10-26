@@ -56,6 +56,7 @@ module StringTools
     class LinksRemoveScrubber
       def initialize(options)
         @whitelist = options.fetch(:whitelist)
+        @remove_without_host = options.fetch(:remove_without_host, true)
         @is_have_done_changes = false
       end
 
@@ -67,11 +68,11 @@ module StringTools
         href = node['href']
         return if href.blank?
         uri = Addressable::URI.parse(href).normalize
-        return unless uri.host
-        replace_with_contetn node unless whitelisted? SimpleIDN.to_unicode(uri.host)
-      rescue
-        # в любой непонятной ситуации просто удаляем ссылку
-        replace_with_content node
+        if !uri.host
+          replace_with_content node if @remove_without_host
+        elsif !whitelisted?(SimpleIDN.to_unicode(uri.host))
+          replace_with_content node
+        end
       end
 
       def whitelisted?(domain)
