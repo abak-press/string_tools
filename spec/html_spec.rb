@@ -105,19 +105,45 @@ describe StringTools::HTML do
           MARKUP
         end
       end
+    end
 
-      context 'content with relative links' do
-        let(:html) do
+    context 'content with links without host' do
+      let(:html) do
           <<-MARKUP
-            <a href="https://google.com"><span>goo</span><span>gle</span></a>
-            <a href="yandex.ru"><span>yan</span><span>dex</span></a>
+            <a href="yandex.ru">relative</a>
+            <a href="/yandex.ru">absolute</a>
+          MARKUP
+      end
+
+      context ':remove_without_host not set' do
+        subject { StringTools::HTML.remove_links(html, whitelist: ['yandex.ru']) }
+
+        it 'should remove' do
+          is_expected.to eq(<<-MARKUP)
+            relative
+            absolute
           MARKUP
         end
+      end
 
-        it 'should keep relative links' do
+      context ':remove_without_host set to false' do
+        subject { StringTools::HTML.remove_links(html, whitelist: ['yandex.ru'], remove_without_host: false) }
+
+        it 'should keep' do
           is_expected.to eq(<<-MARKUP)
-            <span>goo</span><span>gle</span>
-            <a href="yandex.ru"><span>yan</span><span>dex</span></a>
+            <a href="yandex.ru">relative</a>
+            <a href="/yandex.ru">absolute</a>
+          MARKUP
+        end
+      end
+
+      context ':remove_without_host set to true' do
+        subject { StringTools::HTML.remove_links(html, whitelist: ['yandex.ru'], remove_without_host: true) }
+
+        it 'should remove' do
+          is_expected.to eq(<<-MARKUP)
+            relative
+            absolute
           MARKUP
         end
       end
@@ -133,7 +159,7 @@ describe StringTools::HTML do
         MARKUP
       end
 
-      it 'should keep relative links' do
+      it 'should keep only whitelisted links' do
         is_expected.to eq(<<-MARKUP)
           <a href="https://www.фермаежей.рф">www.фермаежей.рф</a>
           www.мояфермаежей.рф
