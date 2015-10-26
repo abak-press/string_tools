@@ -26,7 +26,8 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'addressable', '~> 2.3.2'
   spec.add_runtime_dependency 'ru_propisju', '~> 2.1.4'
   spec.add_runtime_dependency 'sanitize', '>= 3.1.2'
-  spec.add_runtime_dependency 'loofah', '>= 2.0.0'
+  spec.add_runtime_dependency 'nokogiri'
+  spec.add_runtime_dependency 'simpleidn', '>= 0.0.5'
 
   spec.add_development_dependency 'bundler', '~> 1.7'
   spec.add_development_dependency 'rake', '~> 10.0'

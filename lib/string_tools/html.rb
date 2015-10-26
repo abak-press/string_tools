@@ -1,11 +1,18 @@
 # coding: utf-8
-require 'loofah'
+require 'nokogiri'
 require 'addressable/uri'
+require 'simpleidn'
 
 module StringTools
   module HTML
     # минимальная длина строки, в которой могут быть ссылки
     TEXT_WITH_LINKS_MINIMUM_LENGTH = '<a href="'.length
+    HTML_SERIALIZE_OPTIONS = {
+      indent: 0,
+      # сериализуем в xhtml, поскольку при сериализации в html, libxml2 делает чуть больше, чем хотелось бы:
+      # http://stackoverflow.com/questions/24174032/prevent-nokogiri-from-url-encoding-src-attributes
+      save_with: Nokogiri::XML::Node::SaveOptions::AS_XHTML
+    }
 
     # Public: Удаляет ссылки на неразрешенные домены
     #
@@ -34,24 +41,37 @@ module StringTools
     def self.remove_links(html, options = {})
       return html if html.length < TEXT_WITH_LINKS_MINIMUM_LENGTH
 
-      Loofah.fragment(html).scrub!(LinksRemoveScrubber.new(options)).to_s
+      doc = Nokogiri::HTML::DocumentFragment.parse(html)
+      scrubber = LinksRemoveScrubber.new(options)
+
+      doc.css('a'.freeze).each { |node| scrubber.call node }
+
+      if scrubber.done_changes?
+        doc.children.map { |node| node.serialize HTML_SERIALIZE_OPTIONS }.join
+      else
+        html
+      end
     end
 
-    class LinksRemoveScrubber < Loofah::Scrubber
+    class LinksRemoveScrubber
       def initialize(options)
         @whitelist = options.fetch(:whitelist)
+        @is_have_done_changes = false
       end
 
-      def scrub(node)
-        return unless node.name == 'a'.freeze
+      def done_changes?
+        @is_have_done_changes
+      end
+
+      def call(node)
         href = node['href']
         return if href.blank?
         uri = Addressable::URI.parse(href).normalize
         return unless uri.host
-        node.swap(node.children) unless whitelisted? uri.host
+        replace_with_contetn node unless whitelisted? SimpleIDN.to_unicode(uri.host)
       rescue
         # в любой непонятной ситуации просто удаляем ссылку
-        node.swap(node.children)
+        replace_with_content node
       end
 
       def whitelisted?(domain)
@@ -63,6 +83,13 @@ module StringTools
           return true if @whitelist.include? host
         end
         false
+      end
+
+      private
+
+      def replace_with_content(node)
+        node.swap(node.children)
+        @is_have_done_changes = true
       end
     end
   end
