@@ -105,6 +105,40 @@ module StringTools
     def clear_control_characters(string)
       string.tr("\u0000-\u001f", '')
     end
+
+    # Public: вычищает все html тэги и пробельные символы
+    #
+    # string - String строка для очистки
+    #
+    # Examples
+    #
+    #   strip_all_tags_and_entities("<a>ссылка с&nbsp;пробелом</a><p>параграф&#9;с\tтабуляцией</p>")
+    #   # => "ссылкаспробелом параграфстабуляцией "
+    #
+    # Returns String
+    def strip_all_tags_and_entities(string)
+      Sanitize.fragment(string.gsub(/&#([0-9]|10|11|12|13);|&nbsp;|\xc2\xa0|\s/, ''))
+    end
+
+    # Public: вычищает html тэги кроме переносов
+    #
+    # string - String строка для очистки
+    #
+    # Examples
+    #
+    #   strip_tags_leave_br("<a></a><ul><li>элемент списка</li></ul><p>параграф</p>просто перенос<br>")
+    #   # => "<br />элемент списка<br /><br />параграф<br />просто перенос<br>"
+    #
+    # Returns String
+    def strip_tags_leave_br(string)
+      sanitized = Sanitize.fragment(string, remove_contents: %w(style javascript), elements: %w(p ul li br blockquote))
+
+      sanitized.gsub!(/<(p|li|blockquote)[^>]*>/, '')
+      sanitized.gsub!(%r{<(br /|ul[^>]*|/[^>]*)>}, '<br />')
+      sanitized.gsub!(/<br \/>(\s|\302\240)+/, '<br />')
+
+      sanitized
+    end
   end
   extend Sanitizing
 
