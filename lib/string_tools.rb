@@ -216,4 +216,14 @@ module StringTools
     end
   end
   extend SumInWords
+
+  module Uri
+    def add_params_to_url(url, params = nil)
+      uri = Addressable::URI.parse(url)
+      uri = Addressable::URI.parse("http://#{url}") unless uri.scheme
+      uri.query_values = (uri.query_values || {}).merge!(params.stringify_keys) if params.present?
+      uri.normalize.to_s
+    end
+  end
+  extend Uri
 end
