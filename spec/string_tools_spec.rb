@@ -64,4 +64,47 @@ describe StringTools do
       it { expect(strip_tags_leave_br).to eq('bar<br />') }
     end
   end
+
+  describe '#add_params_to_url' do
+    subject(:add_params_to_url) { described_class.add_params_to_url(url, params) }
+    let(:url) { 'http://test.com' }
+    let(:uri) { 'http://test.com/?param=test' }
+
+    context 'when url with params' do
+      let(:params) { {'param' => 'test'} }
+
+      it { expect(add_params_to_url).to eq uri }
+    end
+
+    context 'when optional params not passed' do
+      it { expect(described_class.add_params_to_url(url)).to eq 'http://test.com/' }
+    end
+
+    context 'when url not normalized' do
+      let(:url) { 'http://TesT.com:80' }
+      let(:params) { {'param' => 'test'} }
+
+      it { expect(add_params_to_url).to eq uri }
+    end
+
+    context 'when url without scheme' do
+      let(:url) { 'test.com' }
+      let(:params) { {'param' => 'test'} }
+
+      it { expect(add_params_to_url).to eq uri }
+    end
+
+    context 'when url scheme is https' do
+      let(:url) { 'https://test.com' }
+      let(:params) { {'param' => 'test'} }
+
+      it { expect(add_params_to_url).to eq 'https://test.com/?param=test' }
+    end
+
+    context 'when key is a symbol with same value' do
+      let(:url) { 'http://test.com/?a=b' }
+
+      it { expect(described_class.add_params_to_url(url, a: 'c')).to eq 'http://test.com/?a=c' }
+    end
+  end
 end
