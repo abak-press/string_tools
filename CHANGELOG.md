@@ -1,5 +1,10 @@
 
 #### [Current]
+ * 2015-12-16 [d310cbf](../../commit/d310cbf) - __(Maxim Derbenev)__ feature(string_tools): add params concatenation method
+ * 2015-11-12 [f665c33](../../commit/f665c33) - __(Konstantin Lazarev)__ feature: перенос методов очистки от html-разметки
+
+#### v0.3.0
+ * 2015-10-28 [a3ca238](../../commit/a3ca238) - __(Sergey D)__ Release 0.3.0
  * 2015-10-26 [62ce841](../../commit/62ce841) - __(Dmitry Bochkarev)__ feature(html): удаление ссылок без хоста по-умолчанию
  * 2015-10-23 [8fe4384](../../commit/8fe4384) - __(Dmitry Bochkarev)__ fix(sanitizer): нормализация ссылок в юникоде
  * 2015-10-23 [4017e3d](../../commit/4017e3d) - __(Dmitry Bochkarev)__ fix(html): кириллические ссылки в урлах
