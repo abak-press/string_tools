@@ -106,5 +106,13 @@ describe StringTools do
 
       it { expect(described_class.add_params_to_url(url, a: 'c')).to eq 'http://test.com/?a=c' }
     end
+
+    context 'when empty url' do
+      let(:url) { '' }
+
+      it 'return nil' do
+        expect(described_class.add_params_to_url(url, a: 'b')).to be_nil
+      end
+    end
   end
 end
