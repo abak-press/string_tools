@@ -223,6 +223,8 @@ module StringTools
       uri = Addressable::URI.parse("http://#{url}") unless uri.scheme
       uri.query_values = (uri.query_values || {}).merge!(params.stringify_keys) if params.present?
       uri.normalize.to_s
+    rescue Addressable::URI::InvalidURIError
+      nil
     end
   end
   extend Uri
