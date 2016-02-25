@@ -1,6 +1,10 @@
 
 #### [Current]
+ * 2016-02-24 [6444952](../../commit/6444952) - __(Nikita Nyatin)__ chore(gemspec): update ru_propisju version
+ * 2016-01-14 [84856d8](../../commit/84856d8) - __(GIGrave)__ fix(lib/string_tools) return nil if InvalidURIError
 
+#### v0.3.1
+ * 2015-12-21 [384b057](../../commit/384b057) - __(Salahutdinov Dmitry)__ Release 0.3.1
 
 #### v3.0.1
  * 2015-12-21 [ed85f26](../../commit/ed85f26) - __(Salahutdinov Dmitry)__ Release 3.0.1
