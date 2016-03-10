@@ -73,6 +73,8 @@ module StringTools
         elsif !whitelisted?(SimpleIDN.to_unicode(uri.host))
           replace_with_content node
         end
+      rescue Addressable::URI::InvalidURIError
+        replace_with_content node
       end
 
       def whitelisted?(domain)
