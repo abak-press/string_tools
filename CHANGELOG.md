@@ -1,5 +1,9 @@
 
 #### [Current]
+ * 2016-03-10 [c23456a](../../commit/c23456a) - __(Dmitry Bochkarev)__ fix(sanitizers): подменять невалидные ссылки своим содержимым
+
+#### v0.4.0
+ * 2016-02-25 [184963b](../../commit/184963b) - __(Salahutdinov Dmitry)__ Release 0.4.0
  * 2016-02-24 [6444952](../../commit/6444952) - __(Nikita Nyatin)__ chore(gemspec): update ru_propisju version
  * 2016-01-14 [84856d8](../../commit/84856d8) - __(GIGrave)__ fix(lib/string_tools) return nil if InvalidURIError
 
