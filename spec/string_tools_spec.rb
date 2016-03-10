@@ -31,6 +31,18 @@ describe StringTools do
       sanitized_string = described_class.sanitize(origin_str)
       expect(sanitized_string).to eq '<a href="http://www.xn--80ajbaetq5a8a.xn--p1ai/">www.фермаежей.рф</a>'
     end
+
+    it 'should delete links with invalid href but keep content' do
+      origin_str = '<a href="http://"><span>a</span>www.фермаежей.рф<span>z</span></a>'
+      sanitized_string = described_class.sanitize(origin_str)
+      expect(sanitized_string).to eq '<span>a</span>www.фермаежей.рф<span>z</span>'
+    end
+
+    it 'should delete images with invalid src' do
+      origin_str = '<span>a</span><img src="http://"/><span>z</span>'
+      sanitized_string = described_class.sanitize(origin_str)
+      expect(sanitized_string).to eq '<span>a</span><span>z</span>'
+    end
   end
 
   describe '#strip_all_tags_and_entities' do

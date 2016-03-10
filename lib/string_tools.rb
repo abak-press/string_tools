@@ -200,6 +200,8 @@ module StringTools
       def normalize_link(node, attr_name)
         return unless node[attr_name]
         node[attr_name] = Addressable::URI.parse(node[attr_name]).normalize.to_s
+      rescue Addressable::URI::InvalidURIError
+        node.swap node.children
       end
     end
 

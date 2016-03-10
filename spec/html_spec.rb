@@ -45,6 +45,14 @@ describe StringTools::HTML do
           MARKUP
         end
       end
+
+      context 'content with invalid links' do
+        let(:html) { '<a href="http://"><span>a</span>www.фермаежей.рф<span>z</span></a>' }
+
+        it 'should return content without links' do
+          is_expected.to eq '<span>a</span>www.фермаежей.рф<span>z</span>'
+        end
+      end
     end
 
     context 'when whitelist passed' do
