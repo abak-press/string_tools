@@ -1,5 +1,9 @@
 
 #### [Current]
+ * 2016-06-02 [697be2c](../../commit/697be2c) - __(Korotaev Danil)__ feat: add clearing deprecated unicode characters
+
+#### v0.5.0
+ * 2016-03-10 [b3cbd16](../../commit/b3cbd16) - __(Dmitry Bochkarev)__ Release 0.5.0
  * 2016-03-10 [c23456a](../../commit/c23456a) - __(Dmitry Bochkarev)__ fix(sanitizers): подменять невалидные ссылки своим содержимым
 
 #### v0.4.0
