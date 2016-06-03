@@ -45,13 +45,13 @@ describe StringTools do
     end
   end
 
-  describe '#clear_deprecated_unicode_characters' do
-    subject(:clear_deprecated_unicode_characters) { described_class.clear_deprecated_unicode_characters(string) }
+  describe '#clear_unicode_separator_characters' do
+    subject(:clear_unicode_separator_characters) { described_class.clear_unicode_separator_characters(string) }
 
     context 'string with \u2029\u2029 symbols' do
-      let(:string) { File.open('spec/fixtures/lsps.txt', &:readline) }
+      let(:string) { File.open('spec/fixtures/separator_characters.txt', &:readline) }
 
-      it { expect(clear_deprecated_unicode_characters).to eq('indissolublestring') }
+      it { expect(clear_unicode_separator_characters).to eq('indissolublestring') }
     end
   end
 
