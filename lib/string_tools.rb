@@ -106,6 +106,15 @@ module StringTools
       string.tr("\u0000-\u001f", '')
     end
 
+    # Public: вычищает устаревшие Unicode символы из строки
+    #
+    # string - String строка, из которой удаляем символы
+    #
+    # Returns String
+    def clear_deprecated_unicode_characters(string)
+      string.tr("\u2028-\u2029", '')
+    end
+
     # Public: вычищает все html тэги и пробельные символы
     #
     # string - String строка для очистки

@@ -45,6 +45,16 @@ describe StringTools do
     end
   end
 
+  describe '#clear_deprecated_unicode_characters' do
+    subject(:clear_deprecated_unicode_characters) { described_class.clear_deprecated_unicode_characters(string) }
+
+    context 'string with \u2029\u2029 symbols' do
+      let(:string) { File.open('spec/fixtures/lsps.txt', &:readline) }
+
+      it { expect(clear_deprecated_unicode_characters).to eq('indissolublestring') }
+    end
+  end
+
   describe '#strip_all_tags_and_entities' do
     subject(:strip_all_tags_and_entities) { described_class.strip_all_tags_and_entities(string) }
 
