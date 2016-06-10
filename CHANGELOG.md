@@ -1,5 +1,9 @@
 
 #### [Current]
+ * 2016-06-03 [739cdac](../../commit/739cdac) - __(Korotaev Danil)__ fix: rename incorrect named method
+
+#### v0.6.0
+ * 2016-06-03 [eb8154b](../../commit/eb8154b) - __(Korotaev Danil)__ Release 0.6.0
  * 2016-06-02 [697be2c](../../commit/697be2c) - __(Korotaev Danil)__ feat: add clearing deprecated unicode characters
 
 #### v0.5.0
