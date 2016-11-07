@@ -1,3 +1,5 @@
+# coding: utf-8
+
 require 'rchardet19'
 require 'addressable/uri'
 require 'active_support/core_ext/module'
@@ -190,6 +192,15 @@ class String
 
   def to_cp1251!
     self.replace(self.to_cp1251)
+  end
+
+  def mb_downcase
+    # https://github.com/rails/rails/commit/393e19e508a08ede0f5037bccb984e3eb252d579
+    if ActiveSupport::VERSION::STRING >= '4.0.0' && ActiveSupport::VERSION::STRING <= '4.2.0'
+      ActiveSupport::Multibyte::Unicode.send(:database).codepoints
+    end
+
+    mb_chars.downcase.to_s
   end
 
   private
