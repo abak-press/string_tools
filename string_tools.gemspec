@@ -38,5 +38,4 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'appraisal', '>= 1.0.2'
   spec.add_development_dependency 'combustion', '>= 0.5.3'
   spec.add_development_dependency 'simplecov', '>= 0.9'
-  spec.add_development_dependency 'pry-debugger'
 end
