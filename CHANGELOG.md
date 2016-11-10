@@ -1,5 +1,10 @@
 
 #### [Current]
+ * 2016-11-07 [90bf503](../../commit/90bf503) - __(Konstantin Lazarev)__ chore: add drone and dip
+ * 2016-11-07 [27502f5](../../commit/27502f5) - __(Konstantin Lazarev)__ feature: add String#mb_downcase method
+
+#### v0.6.1
+ * 2016-06-10 [c6c1931](../../commit/c6c1931) - __(Korotaev Danil)__ Release 0.6.1
  * 2016-06-03 [739cdac](../../commit/739cdac) - __(Korotaev Danil)__ fix: rename incorrect named method
 
 #### v0.6.0
