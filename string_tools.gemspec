@@ -23,7 +23,7 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'actionpack', '>= 3.1.12'
   spec.add_runtime_dependency 'activesupport', '>= 3.1.12'
   spec.add_runtime_dependency 'rchardet19', '~> 1.3.5'
-  spec.add_runtime_dependency 'addressable', '~> 2.3.2'
+  spec.add_runtime_dependency 'addressable', '>= 2.3.2'
   spec.add_runtime_dependency 'ru_propisju', '>= 2.1.4'
   spec.add_runtime_dependency 'sanitize', '>= 3.1.2'
   spec.add_runtime_dependency 'nokogiri'
