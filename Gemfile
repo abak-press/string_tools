@@ -4,9 +4,6 @@ source 'https://rubygems.org'
 gemspec
 
 if RUBY_VERSION < '2'
-  gem 'activerecord', '< 5.0'
-  gem 'actionpack', '< 5.0'
-  gem 'activesupport', '< 5.0'
   gem 'pry-debugger'
 else
   gem 'pry-byebug'
