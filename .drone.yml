@@ -8,6 +8,7 @@ build:
     - /home/data/drone/key_cache:/ssh_keys
   environment:
     - COMPOSE_FILE_EXT=drone
+    - RUBY_IMAGE_TAG=2.2-latest
   commands:
     - wrapdocker docker -v
 
