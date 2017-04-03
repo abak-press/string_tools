@@ -3,8 +3,9 @@
 require 'rchardet19'
 require 'addressable/uri'
 require 'active_support/core_ext/module'
-require 'active_record'
+require 'active_support/version'
 require 'action_pack'
+require 'string_tools/string'
 
 class String
   %w[auto_link excerpt highlight sanitize simple_format word_wrap].each do |method|
@@ -30,7 +31,7 @@ class String
   alias_method_chain :to_f, :strip_comma
 
   def to_b
-    ActiveRecord::ConnectionAdapters::Column.value_to_boolean(self) || false
+    StringTools::String.new(self).to_b
   end
 
   def to_script_safe_json
