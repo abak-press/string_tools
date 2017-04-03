@@ -3,7 +3,7 @@ module StringTools
     TRUE_VALUES = %w(1 t T true TRUE on ON).to_set
 
     def initialize(string)
-      @string = string
+      @string = string.to_s
     end
 
     # Public: cast string value to boolean

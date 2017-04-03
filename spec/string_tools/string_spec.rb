@@ -12,4 +12,9 @@ RSpec.describe StringTools::String, '#to_b' do
       expect(described_class.new(val).to_b).to be true
     end
   end
+
+  it 'allows to pass object responded to_s' do
+    expect(described_class.new(ActiveSupport::Multibyte::Chars.new('t')).to_b).to be true
+    expect(described_class.new(ActiveSupport::Multibyte::Chars.new('f')).to_b).to be false
+  end
 end
