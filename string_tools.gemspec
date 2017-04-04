@@ -28,13 +28,9 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'nokogiri'
   spec.add_runtime_dependency 'simpleidn', '>= 0.0.5'
 
-  spec.add_development_dependency 'bundler', '~> 1.7'
-  spec.add_development_dependency 'rake', '~> 10.0'
+  spec.add_development_dependency 'bundler'
+  spec.add_development_dependency 'rake'
   spec.add_development_dependency 'rspec', '>= 3.4'
-  spec.add_development_dependency 'rspec-rails', '>= 3.4'
-  spec.add_development_dependency 'rspec-given', '~> 3.5'
-  spec.add_development_dependency 'shoulda-matchers', '~> 2.0'
   spec.add_development_dependency 'appraisal', '>= 1.0.2'
-  spec.add_development_dependency 'combustion', '>= 0.5.3'
   spec.add_development_dependency 'simplecov', '>= 0.9'
 end
