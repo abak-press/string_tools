@@ -137,4 +137,9 @@ describe StringTools do
       end
     end
   end
+
+  describe '#valid_utf8?' do
+    it  { expect(StringTools.valid_utf8?('foobar')).to be true }
+    it  { expect(StringTools.valid_utf8?(nil)).to be false }
+  end
 end

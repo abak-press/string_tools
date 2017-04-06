@@ -12,11 +12,8 @@ module StringTools
     # Возвращает true если строка содержит допустимую
     # последовательность байтов для кодировки utf8 и false в обратном случае
     # см. http://en.wikipedia.org/wiki/UTF-8
-    def valid_utf8? string
-      case string
-      when String then string.is_utf8?
-      else false
-      end
+    def valid_utf8?(string)
+      string.respond_to?(:is_utf8?) && string.is_utf8?
     end
 
     # shorthand
@@ -66,7 +63,7 @@ module StringTools
   module ActionControllerExtension
     def accepts_non_utf8_params(*args)
       args.each do |arg|
-        next unless arg.is_a?(Symbol) || arg.is_a?(String)
+        next unless arg.is_a?(Symbol) || arg.is_a?(::String)
         arg = arg.to_sym
 
         class_eval do
