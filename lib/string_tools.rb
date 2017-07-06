@@ -176,6 +176,9 @@ module StringTools
         attributes.merge!(attr)
         elements = attributes.keys | TAGS_WITHOUT_ATTRIBUTES
 
+        transformers = [LINK_NORMALIZER]
+        transformers << IframeNormalizer.new(attributes['iframe']) if attributes.key?('iframe')
+
         Sanitize.fragment(
           str,
           :attributes => attributes,
@@ -183,7 +186,7 @@ module StringTools
           :css => {:properties => Sanitize::Config::RELAXED[:css][:properties]},
           :remove_contents => %w(style javascript),
           :allow_comments => false,
-          :transformers => [LINK_NORMALIZER]
+          :transformers => transformers
         )
       end
     end
@@ -208,6 +211,25 @@ module StringTools
         node[attr_name] = Addressable::URI.parse(node[attr_name]).normalize.to_s
       rescue Addressable::URI::InvalidURIError
         node.swap node.children
+      end
+    end
+
+    class IframeNormalizer
+      def initialize(attributes)
+        @attributes = attributes
+      end
+
+      def call(env)
+        node = env[:node]
+
+        return unless node.name == 'iframe'
+
+        unless node[:src] =~ %r{^(http|https):?\/\/(www\.)?youtube?\.com\/}
+          node.unlink
+          return
+        end
+
+        Sanitize.node!(env[:node], elements: %w(iframe), attributes: {'iframe' => @attributes})
       end
     end
 
