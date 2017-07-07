@@ -43,6 +43,17 @@ describe StringTools do
       sanitized_string = described_class.sanitize(origin_str)
       expect(sanitized_string).to eq '<span>a</span><span>z</span>'
     end
+
+    it 'removes iframes but keeps youtube' do
+      origin_str =
+        '<iframe width="20" height="10" src="https://www.dunno.com/embed/qwe" frameborder="0" allowfullscreen>' \
+        '</iframe>' \
+        '<iframe width="123" height="456" src="https://www.youtube.com/embed/abc" frameborder="0" allowfullscreen>' \
+        '</iframe>'
+      sanitized_string = described_class.sanitize(origin_str, 'iframe' => %w(src width height frameborder))
+      expect(sanitized_string).
+        to eq('<iframe width="123" height="456" src="https://www.youtube.com/embed/abc" frameborder="0"></iframe>')
+    end
   end
 
   describe '#clear_unicode_separator_characters' do
