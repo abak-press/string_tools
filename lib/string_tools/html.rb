@@ -2,6 +2,7 @@
 require 'nokogiri'
 require 'addressable/uri'
 require 'simpleidn'
+require_relative './html/truncate'
 
 module StringTools
   module HTML
@@ -13,6 +14,10 @@ module StringTools
       # http://stackoverflow.com/questions/24174032/prevent-nokogiri-from-url-encoding-src-attributes
       save_with: Nokogiri::XML::Node::SaveOptions::AS_XHTML
     }
+
+    def self.truncate(html, limit:)
+      Truncate.new(html, limit: limit).call
+    end
 
     # Public: Удаляет ссылки на неразрешенные домены
     #
