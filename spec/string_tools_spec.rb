@@ -54,6 +54,18 @@ describe StringTools do
       expect(sanitized_string).
         to eq('<iframe width="123" height="456" src="https://www.youtube.com/embed/abc" frameborder="0"></iframe>')
     end
+
+    context 'multiple invocations of the method' do
+      it 'does not mess up default config' do
+        origin_str = '<p style="text-align: center;" title="foobar"></p>'
+
+        with_custom_config = described_class.sanitize(origin_str, 'p' => %w(style title))
+        with_default_config = described_class.sanitize(origin_str)
+
+        expect(with_custom_config).to eq('<p style="text-align: center;" title="foobar"></p>')
+        expect(with_default_config).to eq('<p style="text-align: center;"></p>')
+      end
+    end
   end
 
   describe '#clear_unicode_separator_characters' do
