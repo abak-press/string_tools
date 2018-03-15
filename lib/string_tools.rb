@@ -161,7 +161,7 @@ module StringTools
         'img'   => %w(src width height style)
       }.freeze
 
-      TAGS_WITHOUT_ATTRIBUTES = %w(b strong i em sup sub ul ol li blockquote br tr u caption thead).freeze
+      TAGS_WITHOUT_ATTRIBUTES = %w(b strong i em sup sub ul ol li blockquote br tr u caption thead s).freeze
 
       def sanitize(str, attrs = {})
         # для корректного обрезания utf строчек режем через mb_chars

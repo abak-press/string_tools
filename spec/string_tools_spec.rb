@@ -66,6 +66,12 @@ describe StringTools do
         expect(with_default_config).to eq('<p style="text-align: center;"></p>')
       end
     end
+
+    context 'when string contains "s" tag' do
+      origin_string = '<s>text</s>'
+
+      it { expect(described_class.sanitize(origin_string)).to eq origin_string }
+    end
   end
 
   describe '#clear_unicode_separator_characters' do
