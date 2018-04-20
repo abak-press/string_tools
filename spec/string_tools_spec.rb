@@ -10,7 +10,7 @@ describe StringTools do
     end
 
     it 'removes javascript from string' do
-      sanitized_string = described_class.sanitize('test string<javascript>alert("ALERT");</javascript>' )
+      sanitized_string = described_class.sanitize('test string<script>alert("ALERT");</script>')
       expect(sanitized_string).to eq 'test string'
     end
 
