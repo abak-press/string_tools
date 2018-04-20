@@ -137,7 +137,7 @@ module StringTools
     #
     # Returns String
     def strip_tags_leave_br(string)
-      sanitized = Sanitize.fragment(string, remove_contents: %w(style javascript), elements: %w(p ul li br blockquote))
+      sanitized = Sanitize.fragment(string, remove_contents: %w(style script), elements: %w(p ul li br blockquote))
 
       sanitized.gsub!(/<(p|li|blockquote)[^>]*>/, '')
       sanitized.gsub!(%r{<(br /|ul[^>]*|/[^>]*)>}, '<br />')
@@ -182,7 +182,7 @@ module StringTools
           :attributes => attributes,
           :elements => elements,
           :css => {:properties => Sanitize::Config::RELAXED[:css][:properties]},
-          :remove_contents => %w(style javascript),
+          :remove_contents => %w(style script),
           :allow_comments => false,
           :transformers => transformers
         )
