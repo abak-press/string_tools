@@ -204,6 +204,30 @@ class String
     mb_chars.downcase.to_s
   end
 
+  # Public: returns copy of string with all non-printable characters removed
+  #
+  # Examples
+  #
+  #   "q\uFFFEw\uFFFFe\uFFF0r\uFDD0t\uFDEFy".remove_nonprintable
+  #   # => "qwerty"
+  #
+  # Returns String
+  def remove_nonprintable
+    gsub(/[^[:print:]]/i, '')
+  end
+
+  # Public: removes all non-printable characters from string
+  #
+  # Examples
+  #
+  #   "q\uFFFEw\uFFFFe\uFFF0r\uFDD0t\uFDEFy".remove_nonprintable!
+  #   # => "qwerty"
+  #
+  # Returns String
+  def remove_nonprintable!
+    replace(remove_nonprintable)
+  end
+
   private
 
   def surround_with_ansi(ascii_seq)
