@@ -1,5 +1,3 @@
-# coding: utf-8
-
 require 'rchardet19'
 require 'addressable/uri'
 require 'active_support/core_ext/module'
@@ -213,7 +211,7 @@ class String
   #
   # Returns String
   def remove_nonprintable
-    gsub(/[^[:print:]]/i, '')
+    gsub(/[^[:print:]\n\t]/i, '')
   end
 
   # Public: removes all non-printable characters from string
