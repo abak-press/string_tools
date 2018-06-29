@@ -29,4 +29,5 @@ build:
     volumes:
       - /home/data/drone/rubygems:/root/.gem/credentials
     commands:
+      - chmod 0600 /root/.gem/credentials
       - release-gem --public
