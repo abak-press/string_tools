@@ -19,3 +19,13 @@ build:
     - dip ssh add -T -v /ssh_keys -k /ssh_keys/id_rsa
     - dip provision
     - dip rspec
+
+  release:
+    image: abakpress/gem-publication:edge
+    pull: true
+    when:
+      event: push
+    volumes:
+      - /home/data/drone/rubygems:/root/.gem/credentials
+    commands:
+      - release-gem --public
