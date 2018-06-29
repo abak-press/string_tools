@@ -27,7 +27,6 @@ build:
     when:
       event: push
     volumes:
-      - /home/data/drone/rubygems:/root/.gem/credentials
+      - /home/data/drone/rubygems:/root/.gem
     commands:
-      - chmod 0600 /root/.gem/credentials
       - release-gem --public
