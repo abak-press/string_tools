@@ -22,7 +22,7 @@ build:
       - dip rspec
 
   release:
-    image: abakpress/gem-publication:edge
+    image: abakpress/gem-publication
     pull: true
     when:
       event: push
