@@ -1,45 +1,209 @@
+# v0.12.2
 
-#### [Current]
- * 2016-11-07 [90bf503](../../commit/90bf503) - __(Konstantin Lazarev)__ chore: add drone and dip
- * 2016-11-07 [27502f5](../../commit/27502f5) - __(Konstantin Lazarev)__ feature: add String#mb_downcase method
+* 2018-06-29 [7dfb4d8](../../commit/7dfb4d8) - __(bibendi)__ chore: Fix mounting rubygems in drone.yml 
+* 2018-06-29 [238a46f](../../commit/238a46f) - __(bibendi)__ chore: Set readonly gem/credentials on drone.yml 
+* 2018-06-29 [38b862d](../../commit/38b862d) - __(bibendi)__ chore: Add test section into droen.yml 
+* 2018-06-29 [3004b9a](../../commit/3004b9a) - __(bibendi)__ chore: Add automatic publication 
+* 2018-06-20 [5c14758](../../commit/5c14758) - __(Simeon Movchan)__ Release 0.12.1 
+* 2018-06-19 [8f2da34](../../commit/8f2da34) - __(Simeon Movchan)__ fix: exclude \n and \t in nonprintable characters 
+https://jira.railsc.ru/browse/GOODS-1352
 
-#### v0.6.1
- * 2016-06-10 [c6c1931](../../commit/c6c1931) - __(Korotaev Danil)__ Release 0.6.1
- * 2016-06-03 [739cdac](../../commit/739cdac) - __(Korotaev Danil)__ fix: rename incorrect named method
+* 2018-06-07 [4ab0e64](../../commit/4ab0e64) - __(korotaev)__ Release 0.12.0 
+* 2018-06-01 [a7703c5](../../commit/a7703c5) - __(Mikhail Nelaev)__ feature: removing nonprintable characters 
+https://jira.railsc.ru/browse/GOODS-1126
 
-#### v0.6.0
- * 2016-06-03 [eb8154b](../../commit/eb8154b) - __(Korotaev Danil)__ Release 0.6.0
- * 2016-06-02 [697be2c](../../commit/697be2c) - __(Korotaev Danil)__ feat: add clearing deprecated unicode characters
+* 2018-04-20 [d6198f7](../../commit/d6198f7) - __(Mikhail Nelaev)__ Release 0.11.1 
+* 2018-04-20 [ec43631](../../commit/ec43631) - __(Mikhail Nelaev)__ fix: use correct tag for js 
+https://jira.railsc.ru/browse/GOODS-1246
 
-#### v0.5.0
- * 2016-03-10 [b3cbd16](../../commit/b3cbd16) - __(Dmitry Bochkarev)__ Release 0.5.0
- * 2016-03-10 [c23456a](../../commit/c23456a) - __(Dmitry Bochkarev)__ fix(sanitizers): подменять невалидные ссылки своим содержимым
+* 2018-03-28 [65a6556](../../commit/65a6556) - __(Mikhail Nelaev)__ Release 0.11.0 
+* 2018-03-14 [42e092d](../../commit/42e092d) - __(terentev)__ feat: adds s tag as allowed 
+https://jira.railsc.ru/browse/GOODS-1146
 
-#### v0.4.0
- * 2016-02-25 [184963b](../../commit/184963b) - __(Salahutdinov Dmitry)__ Release 0.4.0
- * 2016-02-24 [6444952](../../commit/6444952) - __(Nikita Nyatin)__ chore(gemspec): update ru_propisju version
- * 2016-01-14 [84856d8](../../commit/84856d8) - __(GIGrave)__ fix(lib/string_tools) return nil if InvalidURIError
+* 2018-01-23 [02fe448](../../commit/02fe448) - __(Konstantin Lazarev)__ Release 0.10.1 
+* 2018-01-23 [629b9fd](../../commit/629b9fd) - __(Konstantin Lazarev)__ fix: не мутировать дефолтный конфиг при многократном вызове sanitize 
+https://jira.railsc.ru/browse/CK-1371
 
-#### v0.3.1
- * 2015-12-21 [384b057](../../commit/384b057) - __(Salahutdinov Dmitry)__ Release 0.3.1
+* 2017-07-27 [42fae44](../../commit/42fae44) - __(korotaev)__ Release 0.10.0 
+* 2017-07-06 [0f1be65](../../commit/0f1be65) - __(Mikhail Nelaev)__ feature: iframe normalizer 
+https://jira.railsc.ru/browse/GOODS-638
 
-#### v3.0.1
- * 2015-12-21 [ed85f26](../../commit/ed85f26) - __(Salahutdinov Dmitry)__ Release 3.0.1
- * 2015-12-16 [d310cbf](../../commit/d310cbf) - __(Maxim Derbenev)__ feature(string_tools): add params concatenation method
- * 2015-11-12 [f665c33](../../commit/f665c33) - __(Konstantin Lazarev)__ feature: перенос методов очистки от html-разметки
+* 2017-04-07 [599dc3f](../../commit/599dc3f) - __(Semyon Pupkov)__ Release 0.9.1 
+* 2017-04-06 [b0ef302](../../commit/b0ef302) - __(Semyon Pupkov)__ fix: check String class from std lib 
+Closes https://github.com/abak-press/string_tools/issues/23
 
-#### v0.3.0
- * 2015-10-28 [a3ca238](../../commit/a3ca238) - __(Sergey D)__ Release 0.3.0
- * 2015-10-26 [62ce841](../../commit/62ce841) - __(Dmitry Bochkarev)__ feature(html): удаление ссылок без хоста по-умолчанию
- * 2015-10-23 [8fe4384](../../commit/8fe4384) - __(Dmitry Bochkarev)__ fix(sanitizer): нормализация ссылок в юникоде
- * 2015-10-23 [4017e3d](../../commit/4017e3d) - __(Dmitry Bochkarev)__ fix(html): кириллические ссылки в урлах
- * 2015-10-23 [e05076f](../../commit/e05076f) - __(Dmitry Bochkarev)__ fix(html): поддержка относительных путей
- * 2015-10-14 [24bd113](../../commit/24bd113) - __(Dmitry Bochkarev)__ chore: костанта с минимальным размером строки содержащей ссылки
- * 2015-10-12 [e48da9f](../../commit/e48da9f) - __(Dmitry Bochkarev)__ feature: удаление ссылок из текста
- * 2015-08-07 [274f820](../../commit/274f820) - __(evseevleo)__ feature(strip_tags): removing open comment tags
- * 2015-07-20 [94b855d](../../commit/94b855d) - __(Sergey D)__ Release 0.2.0
- * 2015-07-18 [81cb0f1](../../commit/81cb0f1) - __(Sergey D)__ feat: missing String.natcmp & Colorize methods
+* 2017-04-04 [f82cebd](../../commit/f82cebd) - __(Semyon Pupkov)__ chore: remove unused dev dependencies (#22) 
+* remove unused dev dependencies
+* Add coverage
+* 2017-04-04 [6eb63e6](../../commit/6eb63e6) - __(Semyon Pupkov)__ Release 0.9.0 
+* 2017-04-03 [334ca54](../../commit/334ca54) - __(Semyon Pupkov)__ fix: allow to use ActiveSupport::Multibyte::Chars in to_b 
+* 2017-04-03 [9e75fc0](../../commit/9e75fc0) - __(Semyon Pupkov)__ feature: use native implementation for to_b instead active_record 
+* 2017-04-03 [682f2ea](../../commit/682f2ea) - __(Semyon Pupkov)__ chore: remove ruby 1.9.3 and rails 3.1 support 
+* 2017-01-18 [5fe9a1f](../../commit/5fe9a1f) - __(Michail Merkushin)__ Release 0.8.0 
+* 2017-01-18 [ef8b5f1](../../commit/ef8b5f1) - __(Michail Merkushin)__ chore: Relax version for addressable 
+* 2016-11-10 [b01044e](../../commit/b01044e) - __(Dmitry Bochkarev)__ Release 0.7.0 
+* 2016-11-07 [90bf503](../../commit/90bf503) - __(Konstantin Lazarev)__ chore: add drone and dip 
+* 2016-11-07 [27502f5](../../commit/27502f5) - __(Konstantin Lazarev)__ feature: add String#mb_downcase method 
+https://jira.railsc.ru/browse/CK-497
 
-#### v0.1.0
- * 2015-07-15 [29dd2f8](../../commit/29dd2f8) - __(Sergey D)__ feat: Initial commit
- * 2015-07-15 [569f0d6](../../commit/569f0d6) - __(Artem Napolskih)__ Initial commit
+fix: fix mb_downcase for rails >= 4.0 and <= 4.2
+
+https://github.com/rails/rails/commit/393e19e508a08ede0f5037bccb984e3eb252d579
+
+* 2016-06-10 [c6c1931](../../commit/c6c1931) - __(Korotaev Danil)__ Release 0.6.1 
+* 2016-06-03 [739cdac](../../commit/739cdac) - __(Korotaev Danil)__ fix: rename incorrect named method 
+clear_deprecated_unicode_characters -> clear_unicode_separator_characters
+
+https://jira.railsc.ru/browse/SERVICES-1040
+
+* 2016-06-03 [eb8154b](../../commit/eb8154b) - __(Korotaev Danil)__ Release 0.6.0 
+* 2016-06-02 [697be2c](../../commit/697be2c) - __(Korotaev Danil)__ feat: add clearing deprecated unicode characters 
+https://jira.railsc.ru/browse/SERVICES-1040
+
+* 2016-03-10 [b3cbd16](../../commit/b3cbd16) - __(Dmitry Bochkarev)__ Release 0.5.0 
+* 2016-03-10 [c23456a](../../commit/c23456a) - __(Dmitry Bochkarev)__ fix(sanitizers): подменять невалидные ссылки своим содержимым 
+https://jira.railsc.ru/browse/SERVICES-906
+
+* 2016-02-25 [184963b](../../commit/184963b) - __(Salahutdinov Dmitry)__ Release 0.4.0 
+* 2016-02-24 [6444952](../../commit/6444952) - __(Nikita Nyatin)__ chore(gemspec): update ru_propisju version 
+* 2016-01-14 [84856d8](../../commit/84856d8) - __(GIGrave)__ fix(lib/string_tools) return nil if InvalidURIError 
+https://jira.railsc.ru/browse/PC4-16353
+
+* 2015-12-21 [384b057](../../commit/384b057) - __(Salahutdinov Dmitry)__ Release 0.3.1 
+
+# v3.0.1
+
+
+# v0.12.1
+
+* 2018-06-19 [8f2da34](../../commit/8f2da34) - __(Simeon Movchan)__ fix: exclude \n and \t in nonprintable characters 
+https://jira.railsc.ru/browse/GOODS-1352
+
+# v0.12.0
+
+* 2018-06-01 [a7703c5](../../commit/a7703c5) - __(Mikhail Nelaev)__ feature: removing nonprintable characters 
+https://jira.railsc.ru/browse/GOODS-1126
+
+# v0.11.1
+
+* 2018-04-20 [ec43631](../../commit/ec43631) - __(Mikhail Nelaev)__ fix: use correct tag for js 
+https://jira.railsc.ru/browse/GOODS-1246
+
+# v0.11.0
+
+* 2018-03-14 [42e092d](../../commit/42e092d) - __(terentev)__ feat: adds s tag as allowed 
+https://jira.railsc.ru/browse/GOODS-1146
+
+# v0.10.1
+
+* 2018-01-23 [629b9fd](../../commit/629b9fd) - __(Konstantin Lazarev)__ fix: не мутировать дефолтный конфиг при многократном вызове sanitize 
+https://jira.railsc.ru/browse/CK-1371
+
+# v0.10.0
+
+* 2017-07-06 [0f1be65](../../commit/0f1be65) - __(Mikhail Nelaev)__ feature: iframe normalizer 
+https://jira.railsc.ru/browse/GOODS-638
+
+# v0.9.1
+
+* 2017-04-06 [b0ef302](../../commit/b0ef302) - __(Semyon Pupkov)__ fix: check String class from std lib 
+Closes https://github.com/abak-press/string_tools/issues/23
+
+* 2017-04-04 [f82cebd](../../commit/f82cebd) - __(Semyon Pupkov)__ chore: remove unused dev dependencies (#22) 
+* remove unused dev dependencies
+* Add coverage
+
+# v0.9.0
+
+* 2017-04-03 [334ca54](../../commit/334ca54) - __(Semyon Pupkov)__ fix: allow to use ActiveSupport::Multibyte::Chars in to_b 
+* 2017-04-03 [9e75fc0](../../commit/9e75fc0) - __(Semyon Pupkov)__ feature: use native implementation for to_b instead active_record 
+* 2017-04-03 [682f2ea](../../commit/682f2ea) - __(Semyon Pupkov)__ chore: remove ruby 1.9.3 and rails 3.1 support 
+
+# v0.8.0
+
+* 2017-01-18 [ef8b5f1](../../commit/ef8b5f1) - __(Michail Merkushin)__ chore: Relax version for addressable 
+
+# v0.7.0
+
+* 2016-11-07 [90bf503](../../commit/90bf503) - __(Konstantin Lazarev)__ chore: add drone and dip 
+* 2016-11-07 [27502f5](../../commit/27502f5) - __(Konstantin Lazarev)__ feature: add String#mb_downcase method 
+https://jira.railsc.ru/browse/CK-497
+
+fix: fix mb_downcase for rails >= 4.0 and <= 4.2
+
+https://github.com/rails/rails/commit/393e19e508a08ede0f5037bccb984e3eb252d579
+
+# v0.6.1
+
+* 2016-06-03 [739cdac](../../commit/739cdac) - __(Korotaev Danil)__ fix: rename incorrect named method 
+clear_deprecated_unicode_characters -> clear_unicode_separator_characters
+
+https://jira.railsc.ru/browse/SERVICES-1040
+
+# v0.6.0
+
+* 2016-06-02 [697be2c](../../commit/697be2c) - __(Korotaev Danil)__ feat: add clearing deprecated unicode characters 
+https://jira.railsc.ru/browse/SERVICES-1040
+
+# v0.5.0
+
+* 2016-03-10 [c23456a](../../commit/c23456a) - __(Dmitry Bochkarev)__ fix(sanitizers): подменять невалидные ссылки своим содержимым 
+https://jira.railsc.ru/browse/SERVICES-906
+
+# v0.4.0
+
+* 2016-02-24 [6444952](../../commit/6444952) - __(Nikita Nyatin)__ chore(gemspec): update ru_propisju version 
+* 2016-01-14 [84856d8](../../commit/84856d8) - __(GIGrave)__ fix(lib/string_tools) return nil if InvalidURIError 
+https://jira.railsc.ru/browse/PC4-16353
+
+# v0.3.1
+
+* 2015-12-16 [d310cbf](../../commit/d310cbf) - __(Maxim Derbenev)__ feature(string_tools): add params concatenation method 
+https://jira.railsc.ru/browse/PC4-15878
+
+* 2015-11-12 [f665c33](../../commit/f665c33) - __(Konstantin Lazarev)__ feature: перенос методов очистки от html-разметки 
+https://jira.railsc.ru/browse/CK-30
+
+# v0.3.0
+
+* 2015-10-26 [62ce841](../../commit/62ce841) - __(Dmitry Bochkarev)__ feature(html): удаление ссылок без хоста по-умолчанию 
+https://jira.railsc.ru/browse/SERVICES-594
+
+* 2015-10-23 [8fe4384](../../commit/8fe4384) - __(Dmitry Bochkarev)__ fix(sanitizer): нормализация ссылок в юникоде 
+* 2015-10-23 [4017e3d](../../commit/4017e3d) - __(Dmitry Bochkarev)__ fix(html): кириллические ссылки в урлах 
+https://jira.railsc.ru/browse/SERVICES-594
+
+старая логика заменяла unicode ссылки на представление в URI-encoding:
+
+```
+[97] pry(main)> Nokogiri::HTML::DocumentFragment.parse('<a href="http://www.фермаежей.рф/index.html">ссылка</a>').to_s
+=> "<a href=\"http://www.%D1%84%D0%B5%D1%80%D0%BC%D0%B0%D0%B5%D0%B6%D0%B5%D0%B9.%D1%80%D1%84/index.html\">ссылка</a>"
+```
+
+* 2015-10-23 [e05076f](../../commit/e05076f) - __(Dmitry Bochkarev)__ fix(html): поддержка относительных путей 
+https://jira.railsc.ru/browse/SERVICES-594
+
+* 2015-10-14 [24bd113](../../commit/24bd113) - __(Dmitry Bochkarev)__ chore: костанта с минимальным размером строки содержащей ссылки 
+https://jira.railsc.ru/browse/SERVICES-594
+
+https://github.com/abak-press/apress-products/pull/66#discussion_r41950430
+
+* 2015-10-12 [e48da9f](../../commit/e48da9f) - __(Dmitry Bochkarev)__ feature: удаление ссылок из текста 
+https://jira.railsc.ru/browse/SERVICES-597
+
+* 2015-08-07 [274f820](../../commit/274f820) - __(evseevleo)__ feature(strip_tags): removing open comment tags 
+connected to BPC-6442
+closes BPc-6652
+
+# v0.2.0
+
+* 2015-07-18 [81cb0f1](../../commit/81cb0f1) - __(Sergey D)__ feat: missing String.natcmp & Colorize methods 
+
+# v0.1.0
+
+* 2015-07-15 [29dd2f8](../../commit/29dd2f8) - __(Sergey D)__ feat: Initial commit 
+Code merged from Apress::Utils and Plugin base_class_extensions/string
+
+Closes SG-3689
+
+* 2015-07-15 [569f0d6](../../commit/569f0d6) - __(Artem Napolskih)__ Initial commit 
