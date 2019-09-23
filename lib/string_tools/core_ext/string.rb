@@ -4,6 +4,7 @@ require 'active_support/core_ext/module'
 require 'active_support/version'
 require 'action_pack'
 require 'string_tools/string'
+require 'action_controller'
 
 class String
   %w[auto_link excerpt highlight sanitize simple_format word_wrap].each do |method|
