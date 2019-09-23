@@ -38,9 +38,9 @@ describe String do
       'some<!-- comment -->text' => 'sometext',
       'some<ul>text' => 'sometext',
       'some<script>text</script>' => 'sometext',
-      'some<!-- comment' => 'some<-- comment',
+      'some<!-- comment' => 'some',
       '<h1 style="coller:red">>text</h1>>' => '>text>',
-      " <ul>list<li>text</li>\n  <li>text2</li> " => " listtext\n  text2 "
+      " <ul>list<li>text</li>\n  <li>text2</li> " => "listtext\n  text2 "
     }.each do |example_string, result|
       context "when string '#{example_string}'" do
         it { expect(example_string.dup.strip_tags).to eq result }

@@ -4,7 +4,6 @@ require 'active_support/core_ext/module'
 require 'active_support/version'
 require 'action_pack'
 require 'string_tools/string'
-require 'action_controller'
 
 class String
   %w[auto_link excerpt highlight sanitize simple_format word_wrap].each do |method|
@@ -19,7 +18,7 @@ class String
   # возвращает строку из которой удалены HTML-теги
   # символы <>&"  остаются без изменения
   def strip_tags
-    ActionController::Base.helpers.strip_tags(self).to_str.gsub(/<!--/, '<--')
+    Nokogiri::HTML5.parse(self).content
   end
 
   # '11,3'.to_f
