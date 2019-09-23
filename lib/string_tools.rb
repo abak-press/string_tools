@@ -9,6 +9,9 @@ module StringTools
   autoload :HTML, 'string_tools/html'
 
   module CharDet
+    CP1251_COMPATIBLE_ENCODINGS =
+      %w(windows-1253 windows-1254 windows-1255 windows-1256 windows-1258 EUC-TW ISO-8859-8).freeze
+
     # Возвращает true если строка содержит допустимую
     # последовательность байтов для кодировки utf8 и false в обратном случае
     # см. http://en.wikipedia.org/wiki/UTF-8
@@ -28,18 +31,6 @@ module StringTools
 
     def to_cp1251(str)
       str.to_cp1251
-    end
-
-    def cp1251_compatible_encodings
-      [
-        'windows-1253',
-        'windows-1254',
-        'windows-1255',
-        'windows-1256',
-        'windows-1258',
-        'EUC-TW',
-        'ISO-8859-8'
-      ]
     end
   end
   extend CharDet
@@ -256,4 +247,232 @@ module StringTools
     end
   end
   extend Uri
+
+  module Transliteration
+    LAYOUT_EN_TO_RU_MAP = {
+      'q' => 'й', 'Q' => 'Й',
+      'w' => 'ц', 'W' => 'Ц',
+      'e' => 'у', 'E' => 'У',
+      'r' => 'к', 'R' => 'К',
+      't' => 'е', 'T' => 'Е',
+      'y' => 'н', 'Y' => 'Н',
+      'u' => 'г', 'U' => 'Г',
+      'i' => 'ш', 'I' => 'Ш',
+      'o' => 'щ', 'O' => 'Щ',
+      'p' => 'з', 'P' => 'З',
+      '[' => 'х',
+      '{' => 'Х',
+      ']' => 'ъ',
+      '}' => 'Ъ',
+      '|' => '/',
+      '`' => 'ё',
+      '~' => 'Ё',
+      'a' => 'ф', 'A' => 'Ф',
+      's' => 'ы', 'S' => 'Ы',
+      'd' => 'в', 'D' => 'В',
+      'f' => 'а', 'F' => 'А',
+      'g' => 'п', 'G' => 'П',
+      'h' => 'р', 'H' => 'Р',
+      'j' => 'о', 'J' => 'О',
+      'k' => 'л', 'K' => 'Л',
+      'l' => 'д', 'L' => 'Д',
+      ';' => 'ж',
+      ':' => 'Ж',
+      "'" => 'э',
+      '"' => 'Э',
+      'z' => 'я', 'Z' => 'Я',
+      'x' => 'ч', 'X' => 'Ч',
+      'c' => 'с', 'C' => 'С',
+      'v' => 'м', 'V' => 'М',
+      'b' => 'и', 'B' => 'И',
+      'n' => 'т', 'N' => 'Т',
+      'm' => 'ь', 'M' => 'Ь',
+      ',' => 'б',
+      '<' => 'Б',
+      '.' => 'ю',
+      '>' => 'Ю',
+      '/' => '.',
+      '?' => ',',
+      '@' => '"',
+      '#' => '№',
+      '$' => ';',
+      '^' => ':',
+      '&' => '?'
+    }.freeze
+    LAYOUT_RU_TO_EN_MAP = {
+      'й' => 'q', 'Й' => 'Q',
+      'ц' => 'w', 'Ц' => 'W',
+      'у' => 'e', 'У' => 'E',
+      'к' => 'r', 'К' => 'R',
+      'е' => 't', 'Е' => 'T',
+      'н' => 'y', 'Н' => 'Y',
+      'г' => 'u', 'Г' => 'U',
+      'ш' => 'i', 'Ш' => 'I',
+      'щ' => 'o', 'Щ' => 'O',
+      'з' => 'p', 'З' => 'P',
+      'х' => '[',
+      'Х' => '{',
+      'ъ' => ']',
+      'Ъ' => '}',
+      '/' => '|',
+      'ё' => '`',
+      'Ё' => '~',
+      'ф' => 'a', 'Ф' => 'A',
+      'ы' => 's', 'Ы' => 'S',
+      'в' => 'd', 'В' => 'D',
+      'а' => 'f', 'А' => 'F',
+      'п' => 'g', 'П' => 'G',
+      'р' => 'h', 'Р' => 'H',
+      'о' => 'j', 'О' => 'J',
+      'л' => 'k', 'Л' => 'K',
+      'д' => 'l', 'Д' => 'L',
+      'ж' => ';',
+      'Ж' => ':',
+      'э' => "'",
+      'Э' => '"',
+      'я' => 'z', 'Я' => 'Z',
+      'ч' => 'x', 'Ч' => 'X',
+      'с' => 'c', 'С' => 'C',
+      'м' => 'v', 'М' => 'V',
+      'и' => 'b', 'И' => 'B',
+      'т' => 'n', 'Т' => 'N',
+      'ь' => 'm', 'Ь' => 'M',
+      'б' => ',',
+      'Б' => '<',
+      'ю' => '.',
+      'Ю' => '>',
+      '.' => '/',
+      ',' => '?',
+      '"' => '@',
+      '№' => '#',
+      ';' => '$',
+      ':' => '^',
+      '?' => '&'
+    }.freeze
+    LAYOUT_PERSISTENT = {
+      '0' => '0',
+      '1' => '1',
+      '2' => '2',
+      '3' => '3',
+      '4' => '4',
+      '5' => '5',
+      '6' => '6',
+      '7' => '7',
+      '8' => '8',
+      '9' => '9',
+      '!' => '!',
+      '*' => '*',
+      '(' => '(',
+      ')' => ')',
+      ' ' => ' ',
+      '-' => '-',
+      '—' => '—',
+      '_' => '_',
+      '=' => '=',
+      '+' => '+'
+    }.freeze
+    TRANSLIT_RU_TO_EN_MAP = {
+      'щ' => 'shh', 'Щ' => 'Shh',
+      'ё' => 'yo', 'Ё' => 'Yo',
+      'ж' => 'zh', 'Ж' => 'Zh',
+      'ц' => 'cz', 'Ц' => 'Cz',
+      'ч' => 'ch', 'Ч' => 'Ch',
+      'ш' => 'sh', 'Ш' => 'Sh',
+      'ъ' => '``', 'Ъ' => '``',
+      'ы' => 'y`', 'Ы' => 'Y`',
+      'э' => 'e`', 'Э' => 'E`',
+      'ю' => 'yu', 'Ю' => 'Yu',
+      'я' => 'ya', 'Я' => 'Ya',
+      'а' => 'a', 'А' => 'A',
+      'б' => 'b', 'Б' => 'B',
+      'в' => 'v', 'В' => 'V',
+      'г' => 'g', 'Г' => 'G',
+      'д' => 'd', 'Д' => 'D',
+      'е' => 'e', 'Е' => 'E',
+      'з' => 'z', 'З' => 'Z',
+      'и' => 'i', 'И' => 'I',
+      'й' => 'j', 'Й' => 'J',
+      'к' => 'k', 'К' => 'K',
+      'л' => 'l', 'Л' => 'L',
+      'м' => 'm', 'М' => 'M',
+      'н' => 'n', 'Н' => 'N',
+      'о' => 'o', 'О' => 'O',
+      'п' => 'p', 'П' => 'P',
+      'р' => 'r', 'Р' => 'R',
+      'с' => 's', 'С' => 'S',
+      'т' => 't', 'Т' => 'T',
+      'у' => 'u', 'У' => 'U',
+      'ф' => 'f', 'Ф' => 'F',
+      'х' => 'x', 'Х' => 'X',
+      'ь' => '`', 'Ь' => '`'
+    }.freeze
+
+    # Public: варианты строки с учетом смены раскладки и/или транслитерации для Русского и Английского языков
+    #   Смена раскладки выполняется в обе стороны, транслитерация - с Русского на Английский.
+    #
+    # str - String
+    #
+    # Examples
+    #   transliteration_variations('Ruby')
+    #     => ['Ruby', 'Кгин', 'kgin']
+    #   transliteration_variations('Слово')
+    #     => ['Слово', 'ckjdj', 'slovo']
+    #   transliteration_variations('КомпанияPro')
+    #     => ['КомпанияPro']
+    #   transliteration_variations('ويكيبيدي')
+    #     => ['ويكيبيدي']
+    #
+    # returns Array of String
+    def transliteration_variations(str)
+      str_as_chars = str.chars
+      converted = convert_layout(str_as_chars)
+
+      layout_swap = converted[:chars].try(:join)
+      tranliterated = (converted[:was_ru] ? transliterate(str_as_chars) : transliterate(converted[:chars])).try(:join)
+
+      [str, layout_swap, tranliterated].tap(&:compact!)
+    end
+
+    private
+
+    # Internal: Смена раскладки массива символов, ru <-> en.
+    #   Возвращает Hash с двумя ключами:
+    #     :chars  - Array, символы в другой раскладке(nil если не удалось сменить раскладку)
+    #     :was_ru - Bool, принадлежали ли все символы русскому языку.
+    #
+    # splitted_string - Array of String
+    #
+    # Example:
+    #  convert_layout(['a', 'b', 'c']) =>
+    #    {chars: ['ф', 'и', 'с'], was_ru: false}
+    #  convert_layout(['а', 'б', 'в']) =>
+    #    {chars: ['f', ',', 'd'], was_ru: true}
+    #  convert_layout(['ﻮ', 'ﻴ', 'ﻜ']) =>
+    #    {chars: nil, was_ru: false}
+    #
+    # returns Array
+    def convert_layout(splitted_string)
+      str_arr = splitted_string.map do |char|
+        LAYOUT_RU_TO_EN_MAP[char] || LAYOUT_PERSISTENT[char] || break
+      end
+
+      return {chars: str_arr, was_ru: true} if str_arr
+
+      {chars: splitted_string.map { |char| LAYOUT_EN_TO_RU_MAP[char] || LAYOUT_PERSISTENT[char] || break },
+       was_ru: false}
+    end
+
+    # Internal: Транслитерация массива символов, ru -> en
+    #  Если символа нет в словаре, не изменяет его.
+    #
+    # splitted string - Array of String
+    #
+    # Returns Array
+    def transliterate(splitted_string)
+      return unless splitted_string
+
+      splitted_string.map { |char| TRANSLIT_RU_TO_EN_MAP[char] || char }
+    end
+  end
+  extend Transliteration
 end

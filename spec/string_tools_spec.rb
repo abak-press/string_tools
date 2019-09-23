@@ -171,4 +171,70 @@ describe StringTools do
     it  { expect(StringTools.valid_utf8?('foobar')).to be true }
     it  { expect(StringTools.valid_utf8?(nil)).to be false }
   end
+
+  describe '#transliteration_variations' do
+    describe 'maps consitency' do
+      it do
+        expect(described_class::Transliteration::LAYOUT_EN_TO_RU_MAP.size).
+          to eq ::StringTools::Transliteration::LAYOUT_RU_TO_EN_MAP.keys.size
+      end
+      it do
+        expect(::StringTools::Transliteration::LAYOUT_EN_TO_RU_MAP.keys).
+          to match_array ::StringTools::Transliteration::LAYOUT_RU_TO_EN_MAP.values
+      end
+      it do
+        expect(::StringTools::Transliteration::LAYOUT_RU_TO_EN_MAP.keys).
+          to match_array ::StringTools::Transliteration::LAYOUT_EN_TO_RU_MAP.values
+      end
+    end
+
+    let(:subject) { described_class.transliteration_variations(str) }
+    context 'when english string' do
+      let(:str) { 'qwertyuiop[]asdfghjkl;\'zxcvbnm,./' }
+
+      it do
+        expect(subject).to match_array [str,
+                                        'йцукенгшщзхъфывапролджэячсмитьбю.',
+                                        'jczukengshshhzx``fy`vaproldzhe`yachsmit`byu.']
+      end
+    end
+
+    context 'when russian string' do
+      let(:str) { 'йцукенгшщзхъфывапролджэячсмитьбю.' }
+
+      it do
+        expect(subject).to match_array [str,
+                                        'qwertyuiop[]asdfghjkl;\'zxcvbnm,./',
+                                        'jczukengshshhzx``fy`vaproldzhe`yachsmit`byu.']
+      end
+    end
+
+    context 'when string has russian AND english chars' do
+      let(:str) { 'abc абв' }
+
+      it { expect(subject).to match_array [str] }
+    end
+
+    context 'when string has other language chars' do
+      let(:str) { 'ﻮﻴﻜﻴﺒﻳﺪﻳ' }
+
+      it { expect(subject).to match_array [str] }
+    end
+
+    context 'when upper case' do
+      let(:str) { 'AbCd' }
+
+      it 'preserve case' do
+        expect(subject).to match_array [str, 'ФиСв', 'FiSv']
+      end
+    end
+    context 'when string has other chars' do
+      let(:str) { '0123456789!*() -_=+ abc' }
+      it 'preserves them' do
+        expect(subject).to match_array [str,
+                                        '0123456789!*() -_=+ фис',
+                                        '0123456789!*() -_=+ fis']
+      end
+    end
+  end
 end
