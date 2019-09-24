@@ -22,6 +22,31 @@ Or install it yourself as:
 
 TODO: Write usage instructions here
 
+### Transliteration
+
+Usage: ```StringTools.transliteration_variations(<string>)```.
+Method returns an Array of Strings. Returned strings are: given string, string in different keboard layout and transliteration of whichever of first two string happens to be in Russian.
+If there is a char in strng which isn't a part of RU <-> EN keyboard mapping, or string containes both Russian and English chars, only given string wrapped in Array is returned.
+Examples:
+```ruby
+StringTools.transliteration_variations('"Мы почитаем всех нулями, А единицами — себя." - А. С. Пушкин')
+=> ["\"Мы почитаем всех нулями, А единицами — себя.\" - А. С. Пушкин",
+  "@Vs gjxbnftv dct[ yekzvb? F tlbybwfvb — ct,z/@ - F/ C/ Geirby",
+  "\"My` pochitaem vsex nulyami, A ediniczami — sebya.\" - A. S. Pushkin"]
+```
+```ruby
+StringTools.transliteration_variations('Ntrcn d ytdthyjq hfcrkflrt')
+=> ["Ntrcn d ytdthyjq hfcrkflrt", "Текст в неверной раскладке", "Tekst v nevernoj raskladke"]
+```
+```ruby
+StringTools.transliteration_variations('Еуче шт цкщтп лунищфкв дфнщгею')
+=> ["Еуче шт цкщтп лунищфкв дфнщгею", "Text in wrong keyboard layout.", "Euche sht czkshhtp lunishhfkv dfns    hhge."]
+```
+```ruby
+StringTools.transliteration_variations('ﻮﻴﻜﻴﺒﻳﺪﻳ')
+=> ["ﻮﻴﻜﻴﺒﻳﺪﻳ"]
+```
+
 ## Development
 
 After checking out the repo, run `bundle install` to install dependencies. Then, run `bin/console` for an interactive prompt that will allow you to experiment.
