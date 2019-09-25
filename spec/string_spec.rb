@@ -28,4 +28,23 @@ describe String do
 
     it { expect { string.remove_nonprintable! }.to change { string }.to('string with weird characters') }
   end
+
+  describe '#strip_tags' do
+    {
+      'some<dev>text</dev>' => 'sometext',
+      'some<a href="link">text</a>' => 'sometext',
+      '1 & 2 + 3 < 5 > 6' => '1 & 2 + 3 < 5 > 6',
+      '<<li>text</li>' => '<text',
+      'some<!-- comment -->text' => 'sometext',
+      'some<ul>text' => 'sometext',
+      'some<script>text</script>' => 'sometext',
+      'some<!-- comment' => 'some',
+      '<h1 style="coller:red">>text</h1>>' => '>text>',
+      " <ul>list<li>text</li>\n  <li>text2</li> " => "listtext\n  text2 "
+    }.each do |example_string, result|
+      context "when string '#{example_string}'" do
+        it { expect(example_string.dup.strip_tags).to eq result }
+      end
+    end
+  end
 end

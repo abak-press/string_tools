@@ -18,7 +18,7 @@ class String
   # возвращает строку из которой удалены HTML-теги
   # символы <>&"  остаются без изменения
   def strip_tags
-    ActionController::Base.helpers.strip_tags(self).to_str.gsub(/<!--/, '<--')
+    Nokogiri::HTML5.parse(self).content
   end
 
   # '11,3'.to_f
