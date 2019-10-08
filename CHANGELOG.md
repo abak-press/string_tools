@@ -1,5 +1,11 @@
-# v0.12.2
+# v0.13.0
 
+* 2019-10-08 [b182709](../../commit/b182709) - __(Ilya Zhidkov)__ Release 0.13.0 
+* 2019-09-24 [87d134d](../../commit/87d134d) - __(evseevleo)__ chore(transliteration): add examples to README 
+* 2019-09-23 [4effcb9](../../commit/4effcb9) - __(evseevleo)__ feat(translit): add keyboard layout switch&transliteration 
+https://jira.railsc.ru/browse/BPC-15151
+
+* 2018-06-29 [f5213df](../../commit/f5213df) - __(bibendi)__ chore: User latest gem-publication 
 * 2018-06-29 [7dfb4d8](../../commit/7dfb4d8) - __(bibendi)__ chore: Fix mounting rubygems in drone.yml 
 * 2018-06-29 [238a46f](../../commit/238a46f) - __(bibendi)__ chore: Set readonly gem/credentials on drone.yml 
 * 2018-06-29 [38b862d](../../commit/38b862d) - __(bibendi)__ chore: Add test section into droen.yml 
@@ -73,6 +79,13 @@ https://jira.railsc.ru/browse/PC4-16353
 
 # v3.0.1
 
+
+# v0.12.2
+
+* 2018-06-29 [7dfb4d8](../../commit/7dfb4d8) - __(bibendi)__ chore: Fix mounting rubygems in drone.yml 
+* 2018-06-29 [238a46f](../../commit/238a46f) - __(bibendi)__ chore: Set readonly gem/credentials on drone.yml 
+* 2018-06-29 [38b862d](../../commit/38b862d) - __(bibendi)__ chore: Add test section into droen.yml 
+* 2018-06-29 [3004b9a](../../commit/3004b9a) - __(bibendi)__ chore: Add automatic publication 
 
 # v0.12.1
 
