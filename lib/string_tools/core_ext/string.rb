@@ -154,10 +154,11 @@ class String
     end
   end
 
+  WIN_1251_ENCODING = 'windows-1251'.freeze
   # shorthand
   def detect_encoding
     e = ::CharDet.detect(self)["encoding"]
-    e = 'windows-1251' if StringTools.cp1251_compatible_encodings.include?(e)
+    e = WIN_1251_ENCODING if StringTools::CharDet::CP1251_COMPATIBLE_ENCODINGS.include?(e)
     e
   end
 
