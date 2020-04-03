@@ -165,6 +165,24 @@ describe StringTools do
         expect(described_class.add_params_to_url(url, a: 'b')).to be_nil
       end
     end
+
+    context 'turn off normalization' do
+      subject(:add_params_to_url) { described_class.add_params_to_url(url, params, normalize: false) }
+
+      let(:url) do
+        'https://www.beautysystems.ru/katalog-kosmetologicheskih-apparatov/dlya-korrekcii-figury/' \
+        'pressoterapiya/lympha-%e2%80%afpress-%e2%80%afoptimal/?attribute_pa_lympha-press-optimal=apparat'
+      end
+      let(:params) { {'param' => 'test'} }
+
+      let(:uri) do
+        'https://www.beautysystems.ru/katalog-kosmetologicheskih-apparatov/dlya-korrekcii-figury/' \
+        'pressoterapiya/lympha-%e2%80%afpress-%e2%80%afoptimal/?attribute_pa_lympha-press-optimal=apparat' \
+        '&param=test'
+      end
+
+      it { expect(add_params_to_url).to eq uri }
+    end
   end
 
   describe '#valid_utf8?' do
