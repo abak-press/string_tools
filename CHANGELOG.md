@@ -1,4 +1,8 @@
-# v0.14.0
+# v0.15.0
+
+* 2020-05-13 [19cb127](../../commit/19cb127) - __(TamarinEA)__ Release 0.15.0 
+* 2020-04-03 [e63c121](../../commit/e63c121) - __(Mikhail Nelaev)__ feature: optionally turn off uri normalization 
+https://jira.railsc.ru/browse/GOODS-2219
 
 * 2019-10-10 [770ed2b](../../commit/770ed2b) - __(TamarinEA)__ Release 0.14.0 
 * 2019-10-08 [b182709](../../commit/b182709) - __(Ilya Zhidkov)__ Release 0.13.0 
@@ -82,6 +86,11 @@ https://jira.railsc.ru/browse/PC4-16353
 
 # v3.0.1
 
+
+# v0.14.0
+
+* 2019-09-23 [f495195](../../commit/f495195) - __(TamarinEA)__ feature: use nokogiri for strip tags 
+* 2019-09-23 [2054e2a](../../commit/2054e2a) - __(TamarinEA)__ chore: test rails 4.0 - 4.2 
 
 # v0.13.0
 
