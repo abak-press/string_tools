@@ -7,6 +7,9 @@ volumes:
   - name: bundle
     host:
       path: /home/data/drone/gems
+  - name: rubygems
+    host:
+      path: /home/data/drone/rubygems
 
 spec_step_common: &spec_step_common
   pull: if-not-exists
@@ -54,5 +57,8 @@ steps:
     event: push
     branch: master
     status: success
+  volumes:
+  - name: rubygems
+    path: /root/.gem
   commands:
-    - release-gem
+    - release-gem --public
