@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'rchardet19'
 require 'addressable/uri'
 require 'active_support/core_ext/module'
@@ -154,7 +155,7 @@ class String
     end
   end
 
-  WIN_1251_ENCODING = 'windows-1251'.freeze
+  WIN_1251_ENCODING = 'windows-1251'
   # shorthand
   def detect_encoding
     e = ::CharDet.detect(self)["encoding"]

@@ -1,4 +1,5 @@
 # coding: utf-8
+# frozen_string_literal: true
 require 'nokogiri'
 require 'addressable/uri'
 require 'simpleidn'
@@ -44,7 +45,7 @@ module StringTools
       doc = Nokogiri::HTML::DocumentFragment.parse(html)
       scrubber = LinksRemoveScrubber.new(options)
 
-      doc.css('a'.freeze).each { |node| scrubber.call node }
+      doc.css('a').each { |node| scrubber.call node }
 
       if scrubber.done_changes?
         doc.children.map { |node| node.serialize HTML_SERIALIZE_OPTIONS }.join
@@ -78,7 +79,7 @@ module StringTools
       end
 
       def whitelisted?(domain)
-        host_parts = domain.split('.'.freeze)
+        host_parts = domain.split('.')
         host = host_parts[-1] # com, ru ...
         (host_parts.length - 2).downto(0) do |i|
           subdomain = host_parts[i]

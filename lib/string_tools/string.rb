@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module StringTools
   class String
     TRUE_VALUES = %w(1 t T true TRUE on ON).to_set
