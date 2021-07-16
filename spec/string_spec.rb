@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'spec_helper'
 
 describe String do
@@ -24,7 +25,7 @@ describe String do
   end
 
   describe '#remove_nonprintable!' do
-    let(:string) { "\uFDD1string\uFFFE \uFFFFwith\uFDEF weird characters\uFDD0" }
+    let(:string) { "\uFDD1string\uFFFE \uFFFFwith\uFDEF weird characters\uFDD0".dup }
 
     it { expect { string.remove_nonprintable! }.to change { string }.to('string with weird characters') }
   end

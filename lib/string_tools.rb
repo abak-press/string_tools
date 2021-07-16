@@ -1,4 +1,5 @@
 # coding: utf-8
+# frozen_string_literal: true
 require 'string_tools/version'
 require 'ru_propisju'
 require 'sanitize'
@@ -186,10 +187,10 @@ module StringTools
       def call(env)
         node = env[:node]
         case node.name
-        when 'a'.freeze
-          normalize_link node, 'href'.freeze
-        when 'img'.freeze
-          normalize_link node, 'src'.freeze
+        when 'a'
+          normalize_link node, 'href'
+        when 'img'
+          normalize_link node, 'src'
         end
       end
 
@@ -229,7 +230,7 @@ module StringTools
     # Сумма в рублях прописью. Кол-во копеек выводится всегда. Первая буква заглавная
     def rublej_propisju(amount)
       kop = (amount.divmod(1)[1]*100).round
-      result = RuPropisju.rublej(amount.to_i).capitalize
+      result = RuPropisju.rublej(amount.to_i).capitalize.dup
       result << " %.2d " % kop
       result << RuPropisju.choose_plural(kop, 'копейка', 'копейки', 'копеек')
     end
