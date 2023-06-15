@@ -1,5 +1,10 @@
-# v0.16.0
+# v1.0.0
 
+* 2023-06-15 [503fce2](../../commit/503fce2) - __(Andrew N. Shalaev)__ Release v1.0.0 
+* 2023-06-15 [8e9fa48](../../commit/8e9fa48) - __(Andrew N. Shalaev)__ fix: convert to_utf8 correctly, without hidding errors 
+https://jira.railsc.ru/browse/BPC-22244
+
+* 2023-06-15 [9bc5cf5](../../commit/9bc5cf5) - __(Andrew N. Shalaev)__ fix: up test env 
 * 2021-07-16 [8a3bf46](../../commit/8a3bf46) - __(Andrew N. Shalaev)__ Release v0.16.0 
 * 2021-07-16 [5784a91](../../commit/5784a91) - __(Andrew N. Shalaev)__ feature: add support for ruby v2.4 
 https://jira.railsc.ru/browse/BPC-19154
@@ -90,6 +95,11 @@ https://jira.railsc.ru/browse/PC4-16353
 
 # v3.0.1
 
+
+# v0.16.0
+
+* 2021-07-16 [5784a91](../../commit/5784a91) - __(Andrew N. Shalaev)__ feature: add support for ruby v2.4 
+https://jira.railsc.ru/browse/BPC-19154
 
 # v0.15.0
 
