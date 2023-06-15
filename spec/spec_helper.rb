@@ -7,3 +7,4 @@ SimpleCov.start do
 end
 
 require 'string_tools'
+require 'pry-byebug'
