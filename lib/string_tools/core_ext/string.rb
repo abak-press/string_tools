@@ -163,32 +163,21 @@ class String
     e
   end
 
-  def to_utf8!
-    self.replace(self.to_utf8)
+  def to_utf8(inplace = false)
+    return self if valid_encoding? && is_utf8?
+
+    source_enc = detect_encoding
+    return '' unless source_enc
+
+    encode_utf8(source_enc, inplace)
   end
 
-  def to_utf8
-    # и так utf
-    return self if is_utf8?
-
-    enc = detect_encoding
-
-    # если utf или английские буквы, то тоже ок
-    return self if ['utf-8', 'ascii'].include?(enc)
-
-    # если неизвестная каша, то возвращаем пустую строку
-    return '' if enc.nil?
-
-    # иначе пытаемся перекодировать
-    encode 'utf-8', enc, :undef => :replace, :invalid => :replace
-  rescue
-    ''
+  def to_utf8!
+    to_utf8(true)
   end
 
   def to_cp1251
-    encode 'cp1251', :undef => :replace, :invalid => :replace
-  rescue
-    ''
+    encode 'cp1251', undef: :replace, invalid: :replace, replace: ''
   end
 
   def to_cp1251!
@@ -229,6 +218,12 @@ class String
   end
 
   private
+
+  def encode_utf8(source_enc, inplace = false)
+    args = ['utf-8', source_enc, undef: :replace, invalid: :replace, replace: '']
+
+    inplace ? encode!(*args) : encode(*args)
+  end
 
   def surround_with_ansi(ascii_seq)
     "#{ascii_seq}#{protect_escape_of(ascii_seq)}#{ANSI_CLEAR}"
