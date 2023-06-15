@@ -2,6 +2,30 @@
 require 'spec_helper'
 
 describe String do
+  describe '#to_utf8' do
+    let(:invalid_str) { "кирилиц\xD0".dup }
+
+    it do
+      expect(invalid_str).not_to be_valid_encoding
+      expect(invalid_str.to_utf8).to be_valid_encoding
+      expect(invalid_str.to_utf8.is_utf8?).to eq(true)
+      expect(invalid_str.to_utf8).to eq('кирилиц')
+    end
+  end
+
+  describe '#to_utf8!' do
+    let(:invalid_str) { "кирилиц\xD0".dup }
+
+    it do
+      expect(invalid_str).not_to be_valid_encoding
+      invalid_str.to_utf8!
+
+      expect(invalid_str).to be_valid_encoding
+      expect(invalid_str.is_utf8?).to eq(true)
+      expect(invalid_str).to eq('кирилиц')
+    end
+  end
+
   describe '#mb_downcase' do
     it { expect("Кириллица".mb_downcase).to eq("кириллица") }
   end
