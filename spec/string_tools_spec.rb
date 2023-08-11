@@ -56,6 +56,30 @@ describe StringTools do
         to eq('<iframe width="123" height="456" src="https://www.youtube.com/embed/abc" frameborder="0"></iframe>')
     end
 
+    it 'removes outer link from css when protocols given' do
+      origin_str = '<div style="background-image: url(http://i54.tinypic.com/4zuxif.jpg)"></div>'
+      sanitized_string = described_class.sanitize(origin_str)
+      expect(sanitized_string).to eq('<div></div>')
+    end
+
+    it 'do not removes outer link from css when protocols given' do
+      origin_str = '<div style="background-image: url(http://i54.tinypic.com/4zuxif.jpg)"></div>'
+      sanitized_string = described_class.sanitize(origin_str, protocols: %w[http https])
+      expect(sanitized_string).to eq('<div style="background-image: url(http://i54.tinypic.com/4zuxif.jpg)"></div>')
+    end
+
+    it 'removes style content' do
+      origin_str = '<style type="text/css">body{color: red;}</style>'
+      sanitized_string = described_class.sanitize(origin_str)
+      expect(sanitized_string).to eq('')
+    end
+
+    it 'do not removes style content' do
+      origin_str = '<style type="text/css">body{color: red;}</style>'
+      sanitized_string = described_class.sanitize(origin_str, 'style' => %w(type), remove_contents: Set['script'])
+      expect(sanitized_string).to eq('<style type="text/css">body{color: red;}</style>')
+    end
+
     context 'multiple invocations of the method' do
       it 'does not mess up default config' do
         origin_str = '<p style="text-align: center;" title="foobar"></p>'

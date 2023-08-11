@@ -155,12 +155,20 @@ module StringTools
 
       TAGS_WITHOUT_ATTRIBUTES = %w(b strong i em sup sub ul ol li blockquote br tr u caption thead s).freeze
 
+      # Public: Sanitize string
+      # str - String for sanitize
+      # attrs - Hash, custom attributes, defaults empty hash
+      #   remove_contents - Set of string, tags to be removed
+      #   protocols - Array of string, protocols using in css properties urls
       def sanitize(str, attrs = {})
         # для корректного обрезания utf строчек режем через mb_chars
         # для защиты от перегрузки парсера пропускаем максимум 1 мегабайт текста
         # длина русского символа в utf-8 - 2 байта, 1Мб/2б = 524288 = 2**19 символов
         # длина по символам с перестраховкой, т.к. латинские символы(теги, например) занимают 1 байт
         str = str.mb_chars.slice(0..(2**19)).to_s
+
+        remove_contents = attrs.delete(:remove_contents)
+        protocols = attrs.delete(:protocols) || []
 
         # Мерджим добавочные теги и атрибуты
         attributes = TAGS_WITH_ATTRIBUTES.merge(attrs)
@@ -173,8 +181,8 @@ module StringTools
           str,
           :attributes => attributes,
           :elements => elements,
-          :css => {:properties => Sanitize::Config::RELAXED[:css][:properties]},
-          :remove_contents => %w(style script),
+          :css => {:properties => Sanitize::Config::RELAXED[:css][:properties], protocols: protocols},
+          :remove_contents => remove_contents || Set['style', 'script'],
           :allow_comments => false,
           :transformers => transformers
         )
