@@ -80,6 +80,18 @@ describe StringTools do
       expect(sanitized_string).to eq('<style type="text/css">body{color: red;}</style>')
     end
 
+    it 'removes links in alt attribute of img tag' do
+      origin_str = '<img scr="http://test.test" alt="http://test.test test https://test.test alt">'
+      sanitized_string = described_class.sanitize(origin_str, 'img' => %w(scr alt))
+      expect(sanitized_string).to eq('<img scr="http://test.test" alt="test alt">')
+    end
+
+    it 'removes alt attribute of img tag if empty value' do
+      origin_str = '<img scr="http://test.test" alt="http://test.test">'
+      sanitized_string = described_class.sanitize(origin_str, 'img' => %w(scr alt))
+      expect(sanitized_string).to eq('<img scr="http://test.test">')
+    end
+
     context 'multiple invocations of the method' do
       it 'does not mess up default config' do
         origin_str = '<p style="text-align: center;" title="foobar"></p>'

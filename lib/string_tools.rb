@@ -199,6 +199,7 @@ module StringTools
           normalize_link node, 'href'
         when 'img'
           normalize_link node, 'src'
+          remove_links node, 'alt'
         end
       end
 
@@ -209,6 +210,14 @@ module StringTools
         node[attr_name] = Addressable::URI.parse(node[attr_name]).normalize.to_s
       rescue Addressable::URI::InvalidURIError
         node.swap node.children
+      end
+
+      def remove_links(node, attr_name)
+        return unless node[attr_name]
+
+        node[attr_name] = node[attr_name].gsub(URI::DEFAULT_PARSER.make_regexp, '').squish
+
+        node.remove_attribute(attr_name) if node[attr_name].empty?
       end
     end
 
