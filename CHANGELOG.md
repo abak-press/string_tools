@@ -1,4 +1,11 @@
-# v1.0.0
+# v1.1.0
+
+* 2023-10-16 [8ccb54a](../../commit/8ccb54a) - __(ArtemBorodinEvgenyevich)__ Release v1.1.0 
+* 2023-08-29 [bed389b](../../commit/bed389b) - __(Terentev Aleksey)__ feat: sanitize links in alt of img tag 
+https://jira.railsc.ru/browse/PC4-29908
+
+* 2023-08-11 [7848491](../../commit/7848491) - __(Terentev Aleksey)__ feat: add options for sanitize outer links in css 
+https://jira.railsc.ru/browse/PC4-29908
 
 * 2023-06-15 [503fce2](../../commit/503fce2) - __(Andrew N. Shalaev)__ Release v1.0.0 
 * 2023-06-15 [8e9fa48](../../commit/8e9fa48) - __(Andrew N. Shalaev)__ fix: convert to_utf8 correctly, without hidding errors 
@@ -95,6 +102,13 @@ https://jira.railsc.ru/browse/PC4-16353
 
 # v3.0.1
 
+
+# v1.0.0
+
+* 2023-06-15 [8e9fa48](../../commit/8e9fa48) - __(Andrew N. Shalaev)__ fix: convert to_utf8 correctly, without hidding errors 
+https://jira.railsc.ru/browse/BPC-22244
+
+* 2023-06-15 [9bc5cf5](../../commit/9bc5cf5) - __(Andrew N. Shalaev)__ fix: up test env 
 
 # v0.16.0
 
