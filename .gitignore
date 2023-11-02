@@ -10,3 +10,4 @@
 /gemfiles
 /.idea
 Makefile.local
+log/
