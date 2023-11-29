@@ -6,15 +6,4 @@ services:
     environment:
       - SSH_AUTH_SOCK=/ssh/auth/sock
       - BUNDLE_PATH=/bundle/$DOCKER_RUBY_VERSION
-      - BUNDLE_APP_CONFIG=/app/.bundle
-      - TEST_DB_HOST=db
-      - TEST_DB_NAME=docker
-      - TEST_DB_USERNAME=postgres
     command: bash
-    depends_on:
-      - db
-
-  db:
-    image: abakpress/postgres-db:$POSTGRES_IMAGE_TAG
-    environment:
-      - POSTGRES_DB=docker

@@ -1,5 +1,5 @@
+# coding: utf-8
 # frozen_string_literal: true
-
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'string_tools/version'
@@ -20,7 +20,6 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ['lib']
 
-  spec.add_runtime_dependency 'rails', '>= 4.2', '< 5'
   spec.add_runtime_dependency 'actionpack', '>= 4.2.0'
   spec.add_runtime_dependency 'activesupport', '>= 4.2.0'
   spec.add_runtime_dependency 'rchardet19', '~> 1.3.5'
@@ -29,12 +28,10 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'sanitize', '>= 3.1.2'
   spec.add_runtime_dependency 'nokogiri'
   spec.add_runtime_dependency 'simpleidn', '>= 0.0.5'
-  spec.add_runtime_dependency 'pg'
 
   spec.add_development_dependency 'bundler', '~> 1.17.3'
   spec.add_development_dependency 'rake'
-  spec.add_development_dependency 'rspec-rails', '~> 3.0'
-  spec.add_development_dependency 'combustion', '>= 0.5.4'
+  spec.add_development_dependency 'rspec', '>= 3.4'
   spec.add_development_dependency 'appraisal', '>= 1.0.2'
   spec.add_development_dependency 'simplecov', '>= 0.9'
   spec.add_development_dependency 'pry-byebug'

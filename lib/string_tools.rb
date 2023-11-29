@@ -1,13 +1,10 @@
+# coding: utf-8
 # frozen_string_literal: true
 require 'string_tools/version'
-require 'rails'
-require 'action_view'
-require 'active_record'
 require 'ru_propisju'
 require 'sanitize'
 require 'active_support/core_ext/string'
 require 'string_tools/core_ext/string'
-require 'string_tools/engine'
 
 module StringTools
   autoload :HTML, 'string_tools/html'
@@ -184,7 +181,11 @@ module StringTools
           str,
           :attributes => attributes,
           :elements => elements,
-          :css => ::Rails.application.config.string_tools.fetch(:css_sanitize).merge(protocols: protocols),
+          :css => {
+            at_rules_with_styles: ['media'],
+            properties: Sanitize::Config::RELAXED[:css][:properties],
+            protocols: protocols,
+          },
           :remove_contents => remove_contents || Set['style', 'script'],
           :allow_comments => false,
           :transformers => transformers

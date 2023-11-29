@@ -5,5 +5,3 @@ source 'https://rubygems.org'
 gemspec
 
 gem 'actionpack', '~> 4.2.0', require: false
-gem 'loofah', '< 2.20.0', require: false
-gem 'pg', '< 1', require: false
