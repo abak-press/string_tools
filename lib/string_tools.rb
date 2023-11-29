@@ -181,7 +181,11 @@ module StringTools
           str,
           :attributes => attributes,
           :elements => elements,
-          :css => {:properties => Sanitize::Config::RELAXED[:css][:properties], protocols: protocols},
+          :css => {
+            at_rules_with_styles: ['media'],
+            properties: Sanitize::Config::RELAXED[:css][:properties],
+            protocols: protocols,
+          },
           :remove_contents => remove_contents || Set['style', 'script'],
           :allow_comments => false,
           :transformers => transformers
