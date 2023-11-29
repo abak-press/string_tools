@@ -23,13 +23,6 @@ spec_step_common: &spec_step_common
   - bundle exec appraisal bundle exec rspec
 
 steps:
-- name: postgres
-  image: abakpress/postgres-db:11
-  pull: if-not-exists
-  environment:
-    POSTGRES_DB: docker
-  detach: true
-
 - name: build on ruby2.4
   image: abakpress/ruby-app:2.4-latest
   environment:
