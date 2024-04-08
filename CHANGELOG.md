@@ -1,4 +1,18 @@
-# v1.1.0
+# v1.2.0
+
+* 2024-04-08 [be7e7fd](../../commit/be7e7fd) - __(Andrew N. Shalaev)__ Release v1.2.0 
+* 2023-11-29 [393bb13](../../commit/393bb13) - __(GIGrave)__ feature: add media to sanitize rules 
+https://jira.railsc.ru/browse/BPC-22916
+
+* 2023-11-29 [06eb51e](../../commit/06eb51e) - __(GIGrave)__ Revert "feature: add string_tools config" 
+This reverts commit c0b9bf39ec3cf2fce28fe92c7892a0c47593ca09.
+
+* 2023-11-29 [d1c00b9](../../commit/d1c00b9) - __(GIGrave)__ Revert "fix: add postgress to drone" 
+This reverts commit 33e5698fd48d5edf416df316e3466f9e6c58369f.
+
+* 2023-11-02 [33e5698](../../commit/33e5698) - __(GIGrave)__ fix: add postgress to drone 
+* 2023-11-02 [c0b9bf3](../../commit/c0b9bf3) - __(GIGrave)__ feature: add string_tools config 
+https://jira.railsc.ru/browse/BPC-22612
 
 * 2023-10-16 [8ccb54a](../../commit/8ccb54a) - __(ArtemBorodinEvgenyevich)__ Release v1.1.0 
 * 2023-08-29 [bed389b](../../commit/bed389b) - __(Terentev Aleksey)__ feat: sanitize links in alt of img tag 
@@ -102,6 +116,14 @@ https://jira.railsc.ru/browse/PC4-16353
 
 # v3.0.1
 
+
+# v1.1.0
+
+* 2023-08-29 [bed389b](../../commit/bed389b) - __(Terentev Aleksey)__ feat: sanitize links in alt of img tag 
+https://jira.railsc.ru/browse/PC4-29908
+
+* 2023-08-11 [7848491](../../commit/7848491) - __(Terentev Aleksey)__ feat: add options for sanitize outer links in css 
+https://jira.railsc.ru/browse/PC4-29908
 
 # v1.0.0
 
