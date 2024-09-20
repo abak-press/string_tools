@@ -226,6 +226,9 @@ module StringTools
     end
 
     class IframeNormalizer
+      HOSTING_REG = %r{^https?:\/\/(www\.)?(?:(rutube\.ru\/(video|play|embed))|
+        (youtu((?:be|\.be|be\-nocookie)(?:\/|\.com\/(watch|shorts|embed)))))}x.freeze
+
       def initialize(attributes)
         @attributes = attributes
       end
@@ -235,7 +238,7 @@ module StringTools
 
         return unless node.name == 'iframe'
 
-        unless node[:src] =~ %r{^(http|https):?\/\/(www\.)?youtube?\.com\/}
+        unless node[:src] =~ HOSTING_REG
           node.unlink
           return
         end
