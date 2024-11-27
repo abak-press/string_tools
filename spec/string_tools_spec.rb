@@ -56,6 +56,383 @@ describe StringTools do
         to eq('<iframe width="123" height="456" src="https://www.youtube.com/embed/abc" frameborder="0"></iframe>')
     end
 
+    it 'check youtube shorts' do
+      origin_str =
+        '<iframe width="123" height="456" ' \
+        'src="https://youtu.be/sCS0Z13KYmI?si=xHFqyMAv2f0rXEe0" frameborder="0" allowfullscreen>' \
+        '</iframe>'
+      sanitized_string = described_class.sanitize(origin_str, 'iframe' => %w[src width height frameborder])
+      expect(sanitized_string).to eq(
+        '<iframe width="123" height="456" ' \
+        'src="https://youtu.be/sCS0Z13KYmI?si=xHFqyMAv2f0rXEe0" frameborder="0"></iframe>'
+      )
+    end
+
+    it 'check youtube iframe 1' do
+      origin_str =
+        '<iframe width="560" height="315" ' \
+        'src="https://www.youtube.com/embed/q2hv02hi40U?si=-Hw9dc3lT5rMhGZh&amp;controls=0" ' \
+        'title="YouTube video player" frameborder="0" ' \
+        'allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; ' \
+        'web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>'
+      sanitized_string = described_class.sanitize(
+        origin_str,
+        'iframe' => %w[
+          src
+          width
+          height
+          frameborder
+          title
+          allow
+          referrerpolicy
+          allowfullscreen
+        ]
+      )
+      expect(sanitized_string).to eq(
+        '<iframe width="560" height="315" ' \
+        'src="https://www.youtube.com/embed/q2hv02hi40U?si=-Hw9dc3lT5rMhGZh&amp;controls=0" ' \
+        'title="YouTube video player" frameborder="0" ' \
+        'allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" ' \
+        'referrerpolicy="strict-origin-when-cross-origin" allowfullscreen=""></iframe>'
+      )
+    end
+
+    it 'check youtube iframe 2' do
+      origin_str =
+        '<iframe width="560" height="315"' \
+        'src="https://www.youtube.com/embed/q2hv02hi40U?si=-Hw9dc3lT5rMhGZh&amp;controls=0&amp;start=6"' \
+        'title="YouTube video player" frameborder="0"' \
+        'allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"' \
+        'referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>'
+      sanitized_string = described_class.sanitize(
+        origin_str,
+        'iframe' => %w[
+          src
+          width
+          height
+          frameborder
+          title
+          allow
+          referrerpolicy
+          allowfullscreen
+        ]
+      )
+      expect(sanitized_string).to eq(
+        '<iframe width="560" height="315" ' \
+        'src="https://www.youtube.com/embed/q2hv02hi40U?si=-Hw9dc3lT5rMhGZh&amp;controls=0&amp;start=6" ' \
+        'title="YouTube video player" frameborder="0" ' \
+        'allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" ' \
+        'referrerpolicy="strict-origin-when-cross-origin" allowfullscreen=""></iframe>'
+      )
+    end
+
+    it 'check youtube iframe 3' do
+      origin_str =
+        '<iframe width="560" height="315"' \
+        'src="https://www.youtube.com/embed/q2hv02hi40U?si=-Hw9dc3lT5rMhGZh&amp;controls=0"' \
+        'title="YouTube video player" frameborder="0"' \
+        'allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"' \
+        'referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>'
+      sanitized_string = described_class.sanitize(
+        origin_str,
+        'iframe' => %w[
+          src
+          width
+          height
+          frameborder
+          title
+          allow
+          referrerpolicy
+          allowfullscreen
+        ]
+      )
+      expect(sanitized_string).
+        to eq(
+          '<iframe width="560" height="315" ' \
+          'src="https://www.youtube.com/embed/q2hv02hi40U?si=-Hw9dc3lT5rMhGZh&amp;controls=0" ' \
+          'title="YouTube video player" frameborder="0" ' \
+          'allow="accelerometer; autoplay; clipboard-write; ' \
+          'encrypted-media; gyroscope; picture-in-picture; web-share" ' \
+          'referrerpolicy="strict-origin-when-cross-origin" allowfullscreen=""></iframe>'
+        )
+    end
+
+    it 'check youtube iframe 3 for wrong values' do
+      origin_str =
+        '<iframe width="560" height="315"' \
+        'src="https://www.yuotube.com/embed/q2hv02hi40U?si=-Hw9dc3lT5rMhGZh&amp;controls=0"' \
+        'title="YouTube video player" frameborder="0"' \
+        'allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"' \
+        'referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>'
+      sanitized_string = described_class.sanitize(
+        origin_str,
+        'iframe' => %w[
+          src
+          width
+          height
+          frameborder
+          title
+          allow
+          referrerpolicy
+          allowfullscreen
+        ]
+      )
+      expect(sanitized_string).
+        to eq(
+          ''
+        )
+    end
+
+    it 'check youtube iframe 4' do
+      origin_str =
+        '<iframe width="560" height="315"' \
+        'src="https://www.youtube-nocookie.com/embed/q2hv02hi40U?si=-Hw9dc3lT5rMhGZh&amp;controls=0"' \
+        'title="YouTube video player" frameborder="0"' \
+        'allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"' \
+        'referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>'
+      sanitized_string = described_class.sanitize(
+        origin_str,
+        'iframe' => %w[
+          src
+          width
+          height
+          frameborder
+          title
+          allow
+          referrerpolicy
+          allowfullscreen
+        ]
+      )
+      expect(sanitized_string).to eq(
+        '<iframe width="560" height="315" ' \
+        'src="https://www.youtube-nocookie.com/embed/q2hv02hi40U?si=-Hw9dc3lT5rMhGZh&amp;controls=0" ' \
+        'title="YouTube video player" frameborder="0" ' \
+        'allow="accelerometer; autoplay; clipboard-write; ' \
+        'encrypted-media; gyroscope; picture-in-picture; web-share" ' \
+        'referrerpolicy="strict-origin-when-cross-origin" allowfullscreen=""></iframe>'
+      )
+    end
+
+    it 'check youtube iframe 4 for wrong values' do
+      origin_str =
+        '<iframe width="560" height="315"' \
+        'src="https//www.youtube-nocookie.com/embed/q2hv02hi40U?si=-Hw9dc3lT5rMhGZh&amp;controls=0"' \
+        'src="https://youtube-nocookie.com/bembed/q2hv02hi40U?si=-Hw9dc3lT5rMhGZh&amp;controls=0"' \
+        'title="YouTube video player" frameborder="0"' \
+        'allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"' \
+        'referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>'
+      sanitized_string = described_class.sanitize(
+        origin_str,
+        'iframe' => %w[
+          src
+          width
+          height
+          frameborder
+          title
+          allow
+          referrerpolicy
+          allowfullscreen
+        ]
+      )
+      expect(sanitized_string).to_not eq(
+        '<iframe width="560" height="315" ' \
+        'src="https://www.youtube-nocookie.com/embed/q2hv02hi40U?si=-Hw9dc3lT5rMhGZh&amp;controls=0" ' \
+        'title="YouTube video player" frameborder="0" ' \
+        'allow="accelerometer; autoplay; clipboard-write; ' \
+        'encrypted-media; gyroscope; picture-in-picture; web-share" ' \
+        'referrerpolicy="strict-origin-when-cross-origin" allowfullscreen=""></iframe>'
+      )
+    end
+
+    it 'removes iframes but keeps rutube' do
+      origin_str =
+        '<iframe width="20" height="10" src="https://www.dunno.com/embed/qwe" frameborder="0" allowfullscreen>' \
+        '</iframe>' \
+        '<iframe width="720" height="405" src="http://rutube.ru/video/0edee89644a80afda2f2614af3954e48/">' \
+        '</iframe>'
+      sanitized_string = described_class.sanitize(origin_str, 'iframe' => %w[src width height frameborder])
+      expect(sanitized_string).to eq(
+        '<iframe width="720" height="405" ' \
+        'src="http://rutube.ru/video/0edee89644a80afda2f2614af3954e48/"></iframe>'
+      )
+    end
+
+    it 'check rutube iframe 1' do
+      origin_str =
+        '<iframe width="720" height="405" src="http://rutube.ru/play/embed/815fc1aa6cd10353d0a630f6d2510d52/?t=1" ' \
+        'frameBorder="0" allow="clipboard-write; autoplay" webkitAllowFullScreen mozallowfullscreen ' \
+        'allowFullScreen></iframe>'
+      sanitized_string = described_class.sanitize(
+        origin_str,
+        'iframe' => %w[
+          src
+          width
+          height
+          frameborder
+          title
+          allow
+          webkitallowfullscreen
+          mozallowfullscreen
+          allowfullscreen
+        ]
+      )
+      expect(sanitized_string).
+        to eq(
+          '<iframe width="720" height="405" src="http://rutube.ru/play/embed/815fc1aa6cd10353d0a630f6d2510d52/?t=1" ' \
+          'frameborder="0" allow="clipboard-write; autoplay" webkitallowfullscreen="" ' \
+          'mozallowfullscreen="" allowfullscreen=""></iframe>'
+        )
+    end
+
+    it 'check rutube iframe 2' do
+      origin_str =
+        '<iframe width="720" height="405"' \
+        'src="http://rutube.ru/play/embed/815fc1aa6cd10353d0a630f6d2510d52/?t=1&stopTime=70" ' \
+        'frameBorder="0" allow="clipboard-write; autoplay" webkitAllowFullScreen mozallowfullscreen ' \
+        'allowFullScreen></iframe>'
+      sanitized_string = described_class.sanitize(
+        origin_str,
+        'iframe' => %w[
+          src
+          width
+          height
+          frameborder
+          title
+          allow
+          webkitallowfullscreen
+          mozallowfullscreen
+          allowfullscreen
+        ]
+      )
+      expect(sanitized_string).to eq('<iframe width="720" height="405" ' \
+      'src="http://rutube.ru/play/embed/815fc1aa6cd10353d0a630f6d2510d52/?t=1&amp;stopTime=70" ' \
+      'frameborder="0" allow="clipboard-write; autoplay" webkitallowfullscreen="" mozallowfullscreen="" ' \
+      'allowfullscreen=""></iframe>')
+    end
+
+    it 'check rutube iframe 3' do
+      origin_str =
+        '<iframe width="720" height="405" ' \
+        'src="https://rutube.ru/play/embed/815fc1aa6cd10353d0a630f6d2510d52/?t=1&stopTime=70" ' \
+        'frameBorder="0" allow="clipboard-write; autoplay" webkitAllowFullScreen mozallowfullscreen ' \
+        'allowFullScreen></iframe>' \
+        '<p><a href="https://rutube.ru/video/815fc1aa6cd10353d0a630f6d2510d52/">' \
+        'Как узнать свой ip-адрес</a> на <a href="https://rutube.ru/">RUTUBE</a></p>'
+      sanitized_string = described_class.sanitize(
+        origin_str,
+        'iframe' => %w[
+          src
+          width
+          height
+          frameborder
+          title
+          allow
+          webkitallowfullscreen
+          mozallowfullscreen
+          allowfullscreen
+        ]
+      )
+      expect(sanitized_string).to eq(
+        '<iframe width="720" height="405" ' \
+        'src="https://rutube.ru/play/embed/815fc1aa6cd10353d0a630f6d2510d52/?t=1&amp;stopTime=70" ' \
+        'frameborder="0" allow="clipboard-write; autoplay" webkitallowfullscreen="" mozallowfullscreen="" ' \
+        'allowfullscreen=""></iframe>' \
+        '<p><a href="https://rutube.ru/video/815fc1aa6cd10353d0a630f6d2510d52/">' \
+        'Как узнать свой ip-адрес</a> на <a href="https://rutube.ru/">RUTUBE</a></p>'
+      )
+    end
+
+    it 'check rutube iframe 4' do
+      origin_str =
+        '<iframe width="720" height="405" ' \
+        'src="https://rutube.ru/play/embed/815fc1aa6cd10353d0a630f6d2510d52/?t=1&stopTime=70" ' \
+        'frameBorder="0" allow="clipboard-write; autoplay" webkitAllowFullScreen mozallowfullscreen ' \
+        'allowFullScreen></iframe>' \
+        '<p><a href="https://rutube.ru/video/815fc1aa6cd10353d0a630f6d2510d52/">' \
+        'Как узнать свой ip-адрес</a> от <a href="https://rutube.ru/video/person/29699498/">' \
+        'Быстро и просто</a> на <a href="https://rutube.ru/">RUTUBE</a></p>'
+      sanitized_string = described_class.sanitize(
+        origin_str,
+        'iframe' => %w[
+          src
+          width
+          height
+          frameborder
+          title
+          allow
+          webkitallowfullscreen
+          mozallowfullscreen
+          allowfullscreen
+        ]
+      )
+      expect(sanitized_string).to eq(
+        '<iframe width="720" height="405" ' \
+        'src="https://rutube.ru/play/embed/815fc1aa6cd10353d0a630f6d2510d52/?t=1&amp;stopTime=70" ' \
+        'frameborder="0" allow="clipboard-write; autoplay" webkitallowfullscreen="" mozallowfullscreen="" ' \
+        'allowfullscreen=""></iframe>' \
+        '<p><a href="https://rutube.ru/video/815fc1aa6cd10353d0a630f6d2510d52/">' \
+        'Как узнать свой ip-адрес</a> от <a href="https://rutube.ru/video/person/29699498/">' \
+        'Быстро и просто</a> на <a href="https://rutube.ru/">RUTUBE</a></p>'
+      )
+    end
+
+    it 'check rutube iframe 4 for wrong value' do
+      origin_str =
+        '<iframe width="720" height="405" ' \
+        'src="httpa://rutube.ru/play/embed/815fc1aa6cd10353d0a630f6d2510d52/?t=1&stopTime=70" ' \
+        'frameBorder="0" allow="clipboard-write; autoplay" webkitAllowFullScreen mozallowfullscreen ' \
+        'allowFullScreen></iframe>' \
+        '<p><a href="httpa://rutube.ru/video/815fc1aa6cd10353d0a630f6d2510d52/">' \
+        'Как узнать свой ip-адрес</a> от <a href="https://rutube.ru/video/person/29699498/">' \
+        'Быстро и просто</a> на <a href="https://rutube.ru/">RUTUBE</a></p>'
+      sanitized_string = described_class.sanitize(
+        origin_str,
+        'iframe' => %w[
+          src
+          width
+          height
+          frameborder
+          title
+          allow
+          webkitallowfullscreen
+          mozallowfullscreen
+          allowfullscreen
+        ]
+      )
+      expect(sanitized_string).to_not eq(
+        '<iframe width="720" height="405" ' \
+        'src="https://rutube.ru/play/embed/815fc1aa6cd10353d0a630f6d2510d52/?t=1&amp;stopTime=70" ' \
+        'frameborder="0" allow="clipboard-write; autoplay" webkitallowfullscreen="" mozallowfullscreen="" ' \
+        'allowfullscreen=""></iframe>' \
+        '<p><a href="https://rutube.ru/video/815fc1aa6cd10353d0a630f6d2510d52/">' \
+        'Как узнать свой ip-адрес</a> от <a href="https://rutube.ru/video/person/29699498/">' \
+        'Быстро и просто</a> на <a href="https://rutube.ru/">RUTUBE</a></p>'
+      )
+    end
+
+    it 'check wrong case' do
+      origin_str =
+        '<iframe width="720" height="405" src="https://rutube.ruyoutu" ' \
+        'frameBorder="0" allow="clipboard-write; autoplay" webkitAllowFullScreen mozallowfullscreen ' \
+        'allowFullScreen></iframe>'
+      sanitized_string = described_class.sanitize(
+        origin_str,
+        'iframe' => %w[
+          src
+          width
+          height
+          frameborder
+          title
+          allow
+          webkitallowfullscreen
+          mozallowfullscreen
+          allowfullscreen
+        ]
+      )
+      expect(sanitized_string).
+        to eq('')
+    end
+
     it 'removes outer link from css when protocols given' do
       origin_str = '<div style="background-image: url(http://i54.tinypic.com/4zuxif.jpg)"></div>'
       sanitized_string = described_class.sanitize(origin_str)
