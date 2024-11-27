@@ -1,4 +1,8 @@
-# v1.2.0
+# v1.3.0
+
+* 2024-11-15 [771ba6b](../../commit/771ba6b) - __(git3-railsc)__ Release 1.3.0 
+* 2024-09-20 [cba6db7](../../commit/cba6db7) - __(bayerd412)__ feat(ck-editor video hosting): add rutube 
+https://jira.railsc.ru/browse/PC4-31420
 
 * 2024-04-08 [be7e7fd](../../commit/be7e7fd) - __(Andrew N. Shalaev)__ Release v1.2.0 
 * 2023-11-29 [393bb13](../../commit/393bb13) - __(GIGrave)__ feature: add media to sanitize rules 
@@ -116,6 +120,21 @@ https://jira.railsc.ru/browse/PC4-16353
 
 # v3.0.1
 
+
+# v1.2.0
+
+* 2023-11-29 [393bb13](../../commit/393bb13) - __(GIGrave)__ feature: add media to sanitize rules 
+https://jira.railsc.ru/browse/BPC-22916
+
+* 2023-11-29 [06eb51e](../../commit/06eb51e) - __(GIGrave)__ Revert "feature: add string_tools config" 
+This reverts commit c0b9bf39ec3cf2fce28fe92c7892a0c47593ca09.
+
+* 2023-11-29 [d1c00b9](../../commit/d1c00b9) - __(GIGrave)__ Revert "fix: add postgress to drone" 
+This reverts commit 33e5698fd48d5edf416df316e3466f9e6c58369f.
+
+* 2023-11-02 [33e5698](../../commit/33e5698) - __(GIGrave)__ fix: add postgress to drone 
+* 2023-11-02 [c0b9bf3](../../commit/c0b9bf3) - __(GIGrave)__ feature: add string_tools config 
+https://jira.railsc.ru/browse/BPC-22612
 
 # v1.1.0
 
