@@ -27,7 +27,8 @@ class String
   def to_f_with_strip_comma
     self.gsub(/,/,'.').to_f_without_strip_comma
   end
-  alias_method_chain :to_f, :strip_comma
+  alias_method :to_f_without_strip_comma, :to_f
+  alias_method :to_f, :to_f_with_strip_comma
 
   def to_b
     StringTools::String.new(self).to_b
