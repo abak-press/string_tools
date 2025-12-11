@@ -16,4 +16,9 @@ if RUBY_VERSION < '2.7'
     gem 'actionpack', '~> 5.1.7'
     gem 'activesupport', '~> 5.1.7'
   end
+else
+  appraise 'rails6.0' do
+    gem 'actionpack', '~> 6.0.6.1'
+    gem 'activesupport', '~> 6.0.6.1'
+  end
 end

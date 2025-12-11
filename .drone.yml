@@ -16,11 +16,6 @@ spec_step_common: &spec_step_common
   volumes:
   - name: bundle
     path: /bundle
-  commands:
-  - rm -fr Gemfile.lock gemfiles/
-  - bundle install -j 5
-  - bundle exec appraisal install
-  - bundle exec appraisal bundle exec rspec
 
 steps:
 - name: build on ruby2.4
@@ -30,6 +25,25 @@ steps:
     TEST_DB_NAME: docker
     TEST_DB_USERNAME: postgres
     BUNDLE_PATH: /bundle/2.4
+  commands:
+  - bundle install
+  - bundle exec appraisal install
+  - bundle exec appraisal bundle exec rspec
+  <<: *spec_step_common
+
+- name: build on ruby2.7
+  image: abakpress/ruby-app:2.7-latest
+  environment:
+    TEST_DB_HOST: postgres
+    TEST_DB_NAME: docker
+    TEST_DB_USERNAME: postgres
+    BUNDLE_PATH: /bundle/2.7
+  commands:
+  - cp gemfiles-27/Gemfile.lock Gemfile.lock
+  - cp gemfiles-27/*.gemfile.* gemfiles/
+  - bundle install
+  - bundle exec appraisal install
+  - bundle exec appraisal bundle exec rspec
   <<: *spec_step_common
 
 - name: release
