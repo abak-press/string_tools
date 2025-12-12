@@ -39,6 +39,7 @@ steps:
     TEST_DB_USERNAME: postgres
     BUNDLE_PATH: /bundle/2.7
   commands:
+  - cp Gemfile.lock Gemfile.lock.bak
   - cp gemfiles-27/Gemfile.lock Gemfile.lock
   - cp gemfiles-27/*.gemfile.* gemfiles/
   - bundle install
@@ -57,4 +58,5 @@ steps:
   - name: rubygems
     path: /root/.gem
   commands:
+    - cp Gemfile.lock.bak Gemfile.lock
     - release-gem --public
