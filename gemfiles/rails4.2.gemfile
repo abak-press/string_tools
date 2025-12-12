@@ -2,8 +2,8 @@
 
 source "https://rubygems.org"
 
+gem "bigdecimal", "< 2", require: false
 gem "actionpack", "~> 4.2.0"
 gem "activesupport", "~> 4.2.0"
-gem "bigdecimal", "< 2", require: false
 
 gemspec path: "../"

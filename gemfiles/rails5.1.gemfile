@@ -2,6 +2,7 @@
 
 source "https://rubygems.org"
 
+gem "bigdecimal", "< 2", require: false
 gem "actionpack", "~> 5.1.7"
 gem "activesupport", "~> 5.1.7"
 
