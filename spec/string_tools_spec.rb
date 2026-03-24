@@ -410,6 +410,61 @@ describe StringTools do
       )
     end
 
+    it 'check vk video iframe 1' do
+      origin_str =
+        '<iframe src="https://vkvideo.ru/video_ext.php?oid=179337377&id=456239889&hash=ef2342623c6793c9&hd=3" '\
+        'width="1280" height="720" allow="autoplay; encrypted-media; fullscreen; picture-in-picture; '\
+        'screen-wake-lock;" frameborder="0" allowfullscreen></iframe>'
+
+      sanitized_string = described_class.sanitize(
+        origin_str,
+        'iframe' => %w[
+          src
+          width
+          height
+          frameborder
+          title
+          allow
+          webkitallowfullscreen
+          mozallowfullscreen
+          allowfullscreen
+        ]
+      )
+      expect(sanitized_string).to eq(
+        '<iframe src="https://vkvideo.ru/video_ext.php?oid=179337377&amp;id=456239889&amp;'\
+        'hash=ef2342623c6793c9&amp;hd=3" width="1280" height="720" '\
+        'allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock;" '\
+        'frameborder="0" allowfullscreen=""></iframe>'
+      )
+    end
+
+    it 'check vk video iframe 2' do
+      origin_str =
+        '<iframe src="https://vk.com/video_ext.php?oid=-22822305&id=456241864&hd=2" '\
+        'width="853" height="480" allow="autoplay; encrypted-media; fullscreen; picture-in-picture;" '\
+        'frameborder="0" allowfullscreen></iframe>'
+
+      sanitized_string = described_class.sanitize(
+        origin_str,
+        'iframe' => %w[
+          src
+          width
+          height
+          frameborder
+          title
+          allow
+          webkitallowfullscreen
+          mozallowfullscreen
+          allowfullscreen
+        ]
+      )
+      expect(sanitized_string).to eq(
+        '<iframe src="https://vk.com/video_ext.php?oid=-22822305&amp;id=456241864&amp;'\
+        'hd=2" width="853" height="480" allow="autoplay; encrypted-media; fullscreen; picture-in-picture;" '\
+        'frameborder="0" allowfullscreen=""></iframe>'
+      )
+    end
+
     it 'check wrong case' do
       origin_str =
         '<iframe width="720" height="405" src="https://rutube.ruyoutu" ' \
