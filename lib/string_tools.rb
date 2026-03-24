@@ -226,8 +226,12 @@ module StringTools
     end
 
     class IframeNormalizer
-      HOSTING_REG = %r{^https?:\/\/(www\.)?(?:(rutube\.ru\/(video|play|embed))|
-        (youtu((?:be|\.be|be\-nocookie)(?:\/|\.com\/(watch|shorts|embed)))))}x.freeze
+      HOSTING_REG = %r{
+        ^https?:\/\/(www\.)?(?:(rutube\.ru\/(video|play|embed))|
+        (youtu((?:be|\.be|be\-nocookie)(?:\/|\.com\/(watch|shorts|embed)))|
+        ((vkvideo|vk)\.(ru|com)\/video_ext\.php)
+        ))
+      }x.freeze
 
       def initialize(attributes)
         @attributes = attributes
