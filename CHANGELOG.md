@@ -1,4 +1,8 @@
-# v1.4.1
+# v1.5.0
+
+* 2026-04-24 [9f97670](../../commit/9f97670) - __(git2-railsc)__ Release 1.5.0 
+* 2026-03-24 [031988d](../../commit/031988d) - __(Mikhail Nelaev)__ feat: allow vk video iframe 
+https://jira.railsc.ru/browse/GOODS-5003
 
 * 2025-12-12 [349c9e9](../../commit/349c9e9) - __(Andrew N. Shalaev)__ Release v1.4.1 
 * 2025-12-12 [b51bb6e](../../commit/b51bb6e) - __(Andrew N. Shalaev)__ fix: use correct version of bigdecimal 
@@ -129,6 +133,16 @@ https://jira.railsc.ru/browse/PC4-16353
 
 # v3.0.1
 
+
+# v1.4.1
+
+* 2025-12-12 [b51bb6e](../../commit/b51bb6e) - __(Andrew N. Shalaev)__ fix: use correct version of bigdecimal 
+* 2025-12-12 [78f7efa](../../commit/78f7efa) - __(Andrew N. Shalaev)__ fix: return back Gemfile.lock for releases 
+* 2025-12-11 [fd6f02a](../../commit/fd6f02a) - __(Andrew N. Shalaev)__ Release v1.4.0 
+* 2025-12-11 [5937791](../../commit/5937791) - __(Andrew N. Shalaev)__ fix: do not ignore lock-files 
+* 2025-12-11 [9169a2f](../../commit/9169a2f) - __(Andrew N. Shalaev)__ feature: add support ruby v2.7 and rails6 
+* 2025-12-11 [0d2c1d3](../../commit/0d2c1d3) - __(Andrew N. Shalaev)__ fix: use proper ver of bigdecimal 
+* 2025-12-11 [0bf216a](../../commit/0bf216a) - __(Andrew N. Shalaev)__ feature: add support for Rails 5.x 
 
 # v1.3.0
 
